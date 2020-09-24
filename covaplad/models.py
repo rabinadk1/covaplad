@@ -10,13 +10,115 @@ from . import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
+
     # !length assumed to be from werkzeug.security.generate_password_hash
     password = db.Column(db.String(94), unique=True, nullable=False)
 
+    address = db.Column(db.String(255))
+    phone_number = db.Column(db.BigInteger, unique=True)
+    is_admin = db.Column(db.Boolean)
+
+    """
+    DONOT load voluter info when loading User but load user info
+    when loading Volunteer and Donor
+    TODO: Check its uses and complexity later on
+    """
+    voluteer = db.relationship(
+        "Volunteer", backref=db.backref("user", lazy=False), uselist=False
+    )
+    donor = db.relationship(
+        "Donor", backref=db.backref("user", lazy=False), uselist=False
+    )
+
     def __repr__(self):
         return f"User(username='{self.username}', email='{self.email}')"
+
+
+event_registration = db.Table(
+    "event_registration",
+    db.Column(
+        "volunteer_id", db.Integer, db.ForeignKey("volunteer.id"), primary_key=True
+    ),
+    db.Column("event_id", db.Integer, db.ForeignKey("event.id"), primary_key=True),
+)
+
+
+class Volunteer(db.Model):
+    id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    start_date_time = db.Column(db.DateTime, nullable=False)
+    end_date_time = db.Column(db.DateTime, nullable=False)
+
+    """
+    DONOT load event when loading Volunteer but load volunter info
+    using subquery when loading Event
+    TODO: Check its uses and complexity later on
+    """
+    events = db.relationship(
+        "DonationVenue",
+        secondary=event_registration,
+        backref=db.backref("volunteers", lazy="subquery"),
+    )
+
+    def __repr__(self):
+        return (
+            f"Volunteer(start_date_time='{self.start_date_time}', "
+            f"end_date_time='{self.end_date_time}')"
+        )
+
+
+class Event(db.Model):
+    id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    start = db.Column(db.DateTime, nullable=False)
+    end = db.Column(db.DateTime, nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+
+    def __repr__(self):
+        return (
+            f"Event(start_date_time='{self.start_date_time}', "
+            f"end_date_time='{self.end_date_time}')"
+        )
+
+
+donation_registration = db.Table(
+    "donation_registration",
+    db.Column("donor_id", db.Integer, db.ForeignKey("donor.id"), primary_key=True),
+    db.Column(
+        "venue_id", db.Integer, db.ForeignKey("donation_venue.id"), primary_key=True
+    ),
+)
+
+
+class Donor(db.Model):
+    id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    covid_last_symptom_date = db.Column(db.Date, nullable=False)
+
+    """
+    DONOT load donation venue when loading Donor but load donor info
+    using subquery when loading DonationVenue
+    TODO: Check its uses and complexity later on
+    """
+    venues = db.relationship(
+        "DonationVenue",
+        secondary=donation_registration,
+        backref=db.backref("donors", lazy="subquery"),
+    )
+
+    def __repr__(self):
+        return f"Donor(covid_last_symptom_date='{self.covid_last_symptom_date}')"
+
+
+class DonationVenue(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(50), unique=True, nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    phone_number = db.Column(db.BigInteger, unique=True, nullable=False)
+
+    def __repr__(self):
+        return f"DonationVenue(name='{self.name}', address='{self.address}')"
 
 
 if __name__ == "__main__":
