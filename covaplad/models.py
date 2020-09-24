@@ -19,7 +19,7 @@ class User(db.Model):
 
     address = db.Column(db.String(255))
     phone_number = db.Column(db.BigInteger, unique=True)
-    is_admin = db.Column(db.Boolean)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
     """
     DONOT load voluter info when loading User but load user info
