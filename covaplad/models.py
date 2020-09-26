@@ -56,12 +56,12 @@ class Volunteer(db.Model):
     end_date_time = db.Column(db.DateTime, nullable=False)
 
     """
-    DONOT load event when loading Volunteer but load volunter info
+    DONOT load events when loading Volunteer but load volunters info
     using subquery when loading Event
     TODO: Check its uses and complexity later on
     """
     events = db.relationship(
-        "DonationVenue",
+        "Event",
         secondary=event_registration,
         backref=db.backref("volunteers", lazy="subquery"),
     )
@@ -100,7 +100,7 @@ class Donor(db.Model):
     covid_last_symptom_date = db.Column(db.Date, nullable=False)
 
     """
-    DONOT load donation venue when loading Donor but load donor info
+    DONOT load donation venues when loading Donor but load donors info
     using subquery when loading DonationVenue
     TODO: Check its uses and complexity later on
     """
