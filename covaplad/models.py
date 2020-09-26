@@ -3,6 +3,10 @@ This file contains the model of the database
 NOTE: This doesn't create an extra class and lets the statements
 fall at database level. So the validation should be done before
 passing to this class using wtforms or something.
+
+! A single-column primary key that is of an INTEGER type with no
+stated client-side or python-side defaults should receive auto
+increment semantics automatically
 """
 
 from . import db
@@ -70,7 +74,7 @@ class Volunteer(db.Model):
 
 
 class Event(db.Model):
-    id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     start = db.Column(db.DateTime, nullable=False)
     end = db.Column(db.DateTime, nullable=False)
     address = db.Column(db.String(255), nullable=False)
