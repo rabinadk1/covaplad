@@ -1,3 +1,7 @@
 flask==1.1.2
 flask_sqlalchemy==2.4.4
 PyMySQL==0.10.1
+sqlalchemy-utils==0.35.0
+fastpbkdf2==0.2 # for faster pbkdf2 hash
+Flask-Migrate==2.5.2
+Flask-WTF==0.14.3
