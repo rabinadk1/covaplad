@@ -76,6 +76,7 @@ class Volunteer(db.Model):
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
     start = db.Column(db.DateTime, nullable=False)
     end = db.Column(db.DateTime, nullable=False)
     address = db.Column(db.String(255), nullable=False)
@@ -120,7 +121,7 @@ class DonationVenue(db.Model):
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(su.EmailType(), unique=True, nullable=False)
     address = db.Column(db.String(255), nullable=False)
-    phone_number = db.Column(db.BigInteger, unique=True, nullable=False)
+    phone_number = db.Column(db.BigInteger, nullable=False)
 
     def __repr__(self):
         return f"DonationVenue(name='{self.name}', address='{self.address}')"
