@@ -8,9 +8,10 @@ passing to this class using wtforms or something.
 stated client-side or python-side defaults should receive auto
 increment semantics automatically
 """
-
-from . import app, db
 import sqlalchemy_utils as su
+
+from . import db
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,7 +23,7 @@ class User(db.Model):
     password = db.Column(su.PasswordType(schemes=["pbkdf2_sha512"]), nullable=False)
 
     address = db.Column(db.String(255))
-    phone_number = db.Column(db.BigInteger, unique=True)
+    phone_number = db.Column(db.BigInteger)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
     """
@@ -46,8 +47,7 @@ event_registration = db.Table(
     db.Column(
         "volunteer_id", db.Integer, db.ForeignKey("volunteer.id"), primary_key=True
     ),
-    db.Column("event_id", db.Integer, db.ForeignKey(
-        "event.id"), primary_key=True),
+    db.Column("event_id", db.Integer, db.ForeignKey("event.id"), primary_key=True),
 )
 
 
@@ -89,8 +89,7 @@ class Event(db.Model):
 
 donation_registration = db.Table(
     "donation_registration",
-    db.Column("donor_id", db.Integer, db.ForeignKey(
-        "donor.id"), primary_key=True),
+    db.Column("donor_id", db.Integer, db.ForeignKey("donor.id"), primary_key=True),
     db.Column(
         "venue_id", db.Integer, db.ForeignKey("donation_venue.id"), primary_key=True
     ),
@@ -125,4 +124,3 @@ class DonationVenue(db.Model):
 
     def __repr__(self):
         return f"DonationVenue(name='{self.name}', address='{self.address}')"
-
