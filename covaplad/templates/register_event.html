@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+<h1>Donation Venue Registration Form</h1>
+<form method="POST">
+  {{form.hidden_tag()}}
+  {{render_field(form.name)}}
+  {{render_field(form.start)}}
+  {{render_field(form.end)}}
+  {{render_field(form.address)}}
+  {{form.submit()}}
+</form>
+{% endblock %}
