@@ -43,17 +43,18 @@ class UserRegistrationForm(FlaskForm):
     submit = SubmitField("Sign Up")
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user:
+        user = User.query.filter_by(username=username.data).one_or_none()
+        if user is not None:
             raise ValidationError(
-                "This username cannot be used. Please choose a different one."
+                "This username is taken. Please choose a different one."
             )
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user:
+        user = User.query.filter_by(email=email.data).one_or_none()
+        if user is not None:
             raise ValidationError(
-                "This email is taken. If it is your email, proceed to login."
+                "This email is taken. Try another email. "
+                "If it is your email, contact us."
             )
 
 
@@ -97,6 +98,6 @@ class EventResistrationForm(FlaskForm):
 class DonationVenueRegistrationForm(FlaskForm):
     name = StringField("Name", validators=[Length(2, 100)])
     email = EmailField("Email", validators=[Length(max=255)])
-    address = StringField("Address", validators=[Optional(), Length(2, 255)])
-    phone_number = TelField("Phone Number", validators=[Optional()])
+    address = StringField("Address", validators=[Length(2, 255)])
+    phone_number = TelField("Phone Number", validators=[DataRequired()])
     submit = SubmitField("Register Venue")
