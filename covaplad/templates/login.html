@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Log in
+{% endblock %}
+
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+<h1>Log In</h1>
+
+<form method="POST">
+  {{form.hidden_tag()}}
+  {{ render_field(form.email)}}
+  {{render_field(form.password)}}
+
+  {{form.submit()}}
+</form>
+<div class="login-signup">
+    <span>Don't have an account? <a href="{{ url_for('.register') }}">Sign up.</a></span>
+  </div>
+{% endblock %}

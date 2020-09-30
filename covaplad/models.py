@@ -9,11 +9,12 @@ stated client-side or python-side defaults should receive auto
 increment semantics automatically
 """
 import sqlalchemy_utils as su
+from flask_login import UserMixin
 
 from . import db
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(20), unique=True, nullable=False)

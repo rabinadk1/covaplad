@@ -2,23 +2,72 @@ from datetime import datetime
 
 from flask_wtf import FlaskForm
 from wtforms.fields import PasswordField, StringField, SubmitField
-from wtforms.fields.html5 import DateTimeLocalField, EmailField, IntegerField
-from wtforms.validators import DataRequired, EqualTo, Length, NumberRange, Optional
+from wtforms.fields.html5 import DateTimeLocalField, EmailField, TelField
+from wtforms.validators import DataRequired, EqualTo, Length, Optional, ValidationError
+
+from .models import User
 
 
 class UserRegistrationForm(FlaskForm):
-    name = StringField("Name", validators=[Length(2, 100)])
-    username = StringField("Username", validators=[Length(2, 20)])
-    email = EmailField("Email", validators=[Length(max=255)])
-    password = PasswordField("Password", validators=[Length(8, 100)])
+    name = StringField(
+        "Name",
+        validators=[DataRequired("Please enter your full name."), Length(2, 100)],
+    )
+    username = StringField(
+        "Username",
+        validators=[
+            DataRequired("Please enter a username. The length can not be less than 4."),
+            Length(4, 20),
+        ],
+    )
+    email = EmailField(
+        "Email",
+        validators=[
+            DataRequired("Please enter a vallid email address."),
+            Length(max=255),
+        ],
+    )
+    password = PasswordField(
+        "Password",
+        validators=[
+            DataRequired("Please enter a password."),
+            Length(min=8, max=100, message="Please enter a stronger password."),
+        ],
+    )
     confirm_password = PasswordField(
-        "Confirm Password", validators=[EqualTo("password")]
+        "Confirm Password",
+        validators=[EqualTo("password", message="Passwords donot match.")],
     )
     address = StringField("Address", validators=[Optional(), Length(2, 255)])
-    # phone_number = IntegerField(
-    #     "Phone Number", validators=[NumberRange(100, 9999999999)]
-    # )
+    phone_number = TelField("Phone Number", validators=[Optional()])
     submit = SubmitField("Sign Up")
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError(
+                "This username cannot be used. Please choose a different one."
+            )
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(
+                "This email is taken. If it is your email, proceed to login."
+            )
+
+
+class LoginForm(FlaskForm):
+    """User log in form"""
+
+    email = EmailField(
+        "Email",
+        validators=[
+            DataRequired("Please enter a vallid email address."),
+        ],
+    )
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Log In")
 
 
 class EventResistrationForm(FlaskForm):
@@ -49,7 +98,5 @@ class DonationVenueRegistrationForm(FlaskForm):
     name = StringField("Name", validators=[Length(2, 100)])
     email = EmailField("Email", validators=[Length(max=255)])
     address = StringField("Address", validators=[Optional(), Length(2, 255)])
-    phone_number = IntegerField(
-        "Phone Number", default=0, validators=[NumberRange(100, 9999999999)]
-    )
+    phone_number = TelField("Phone Number", validators=[Optional()])
     submit = SubmitField("Register Venue")
