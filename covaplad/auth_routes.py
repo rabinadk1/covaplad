@@ -1,5 +1,6 @@
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, logout_user
+from is_safe_url import is_safe_url
 
 from . import app, db, login_manager
 from .forms import LoginForm, UserRegistrationForm
@@ -48,11 +49,17 @@ def login():
         return redirect(url_for("index"))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and user.password == form.password.data:
+        user = User.query.filter_by(email=form.email.data).one_or_none()
+        if user is not None and user.password == form.password.data:
             login_user(user)
             next_page = request.args.get("next")
-            return redirect(next_page) if next_page else redirect(url_for("index"))
+            # !Redirect only if the url is safe
+            # TODO: Change allowed_hosts and require_https later on
+            return redirect(
+                next_page
+                if is_safe_url(next_page, ("localhost:5000",))
+                else url_for("index")
+            )
         else:
             flash("Invalid credentials. Please check again and enter.", "danger")
     return render_template("login.html", form=form)
