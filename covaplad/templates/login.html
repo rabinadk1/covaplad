@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Log in
+Log In
 {% endblock %}
 
 {% block content %}
@@ -12,10 +12,11 @@
   {{form.hidden_tag()}}
   {{ render_field(form.email)}}
   {{render_field(form.password)}}
+  {{render_field(form.remember_me)}}
 
   {{form.submit()}}
 </form>
 <div class="login-signup">
-    <span>Don't have an account? <a href="{{ url_for('.register') }}">Sign up.</a></span>
-  </div>
+  <span>Don't have an account? <a href="{{ url_for('.register') }}">Sign up.</a></span>
+</div>
 {% endblock %}

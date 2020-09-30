@@ -11,6 +11,9 @@ app = Flask(__name__, instance_relative_config=True)
 app.config.from_pyfile("config.py")
 
 login_manager = LoginManager(app)
+# TODO: Doesn't work right now. I (Rabin) don't know why
+login_manager.login_message_category = "info"
+
 
 db = SQLAlchemy(app)
 Migrate(app, db)

@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flask_wtf import FlaskForm
-from wtforms.fields import PasswordField, StringField, SubmitField
+from wtforms.fields import BooleanField, PasswordField, StringField, SubmitField
 from wtforms.fields.html5 import DateTimeLocalField, EmailField, TelField
 from wtforms.validators import DataRequired, EqualTo, Length, Optional, ValidationError
 
@@ -68,6 +68,7 @@ class LoginForm(FlaskForm):
         ],
     )
     password = PasswordField("Password", validators=[DataRequired()])
+    remember_me = BooleanField("Remember Me")
     submit = SubmitField("Log In")
 
 

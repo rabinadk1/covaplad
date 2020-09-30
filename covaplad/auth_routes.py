@@ -38,6 +38,7 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
+        login_user(user)
         flash("Your account has been created! You are now able to log in", "success")
         return redirect(url_for("login"))
     return render_template("register.html", form=form)
@@ -51,13 +52,13 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).one_or_none()
         if user is not None and user.password == form.password.data:
-            login_user(user)
+            login_user(user, form.remember_me.data)
             next_page = request.args.get("next")
             # !Redirect only if the url is safe
             # TODO: Change allowed_hosts and require_https later on
             return redirect(
                 next_page
-                if is_safe_url(next_page, ("localhost:5000",))
+                if is_safe_url(next_page, ("localhost:5000", "127.0.0.1:5000"))
                 else url_for("index")
             )
         else:
