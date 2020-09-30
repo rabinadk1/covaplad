@@ -32,7 +32,7 @@ class User(db.Model, UserMixin):
     when loading Volunteer and Donor
     TODO: Check its uses and complexity later on
     # """
-    voluteer = db.relationship(
+    volunteer = db.relationship(
         "Volunteer", backref=db.backref("user", lazy=False), uselist=False
     )
     donor = db.relationship(
