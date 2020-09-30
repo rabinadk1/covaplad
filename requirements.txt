@@ -5,3 +5,4 @@ sqlalchemy-utils==0.36.8
 passlib==1.7.2
 Flask-Migrate==2.5.3
 Flask-WTF==0.14.3
+Flask-Login==0.5.0
