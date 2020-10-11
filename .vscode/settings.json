@@ -6,12 +6,6 @@
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
   "python.formatting.provider": "black",
-  // Make max-line-length 88 to comply with black
-  "python.linting.flake8Args": [
-    "--max-line-length=88",
-    "--extend-ignore=E203,W503"
-  ],
-  "python.sortImports.args": ["--profile=black"],
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
