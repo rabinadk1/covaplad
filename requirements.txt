@@ -1,3 +1,4 @@
+wheel==0.35.1
 flask==1.1.2
 flask_sqlalchemy==2.4.4
 PyMySQL==0.10.1
@@ -7,7 +8,7 @@ Flask-Migrate==2.5.3
 Flask-WTF==0.14.3
 Flask-Login==0.5.0
 is-safe-url==1.0
-wheel==0.35.1
+
 # Dev Dependencies
 #! Better to install these globally using package manager
 flake8==3.8.4
