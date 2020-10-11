@@ -20,12 +20,13 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(su.EmailType(), unique=True, nullable=False)
 
-    # !length assumed to be from werkzeug.security.generate_password_hash
     password = db.Column(su.PasswordType(schemes=["pbkdf2_sha512"]), nullable=False)
 
     # address = db.Column(db.String(255))
     phone_number = db.Column(db.BigInteger)
-    is_admin = db.Column(db.Boolean, nullable=False, default=False)
+
+    # Makes database server automatically add 0 on default
+    is_admin = db.Column(db.Boolean, server_default="0")
 
     temporary_address_id = db.Column(db.Integer, db.ForeignKey("city.id"))
     permanent_address_id = db.Column(db.Integer, db.ForeignKey("city.id"))
@@ -107,14 +108,13 @@ class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     details = db.Column(db.Text(), nullable=False)
-    volunteer_id = db.Column(db.Integer, db.ForeignKey("volunteer.id"), nullable=True)
 
 
 class EventType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text(), nullable=False)
-    events = db.relationship("Event", backref="eventtype", lazy=True)
+    events = db.relationship("Event", backref="event_type", lazy=True)
 
 
 class Event(db.Model):
@@ -125,7 +125,7 @@ class Event(db.Model):
     event_type_id = db.Column(
         db.Integer, db.ForeignKey("event_type.id"), nullable=False
     )
-    city_id = db.Column(db.Integer, db.ForeignKey("city.id"), nullable="False")
+    city_id = db.Column(db.Integer, db.ForeignKey("city.id"), nullable=False)
 
     def __repr__(self):
         return (
@@ -152,7 +152,9 @@ donor_disease = db.Table(
 class Donor(db.Model):
     id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
     covid_last_symptom_date = db.Column(db.Date, nullable=False)
-    blood_group = db.Column(db.String(10), nullable=False)
+
+    # !Store as AB+
+    blood_group = db.Column(db.String(3), nullable=False)
     test_report = db.Column(db.Text())
     age = db.Column(db.Integer, nullable=False)
     weight = db.Column(db.Integer, nullable=False)
