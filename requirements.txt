@@ -1,3 +1,4 @@
+wheel==0.35.1
 flask==1.1.2
 flask_sqlalchemy==2.4.4
 PyMySQL==0.10.1
@@ -12,4 +13,4 @@ is-safe-url==1.0
 #! Better to install these globally using package manager
 flake8==3.8.4
 black==20.8b1
-isort==5.5.4
+isort==5.6.3
