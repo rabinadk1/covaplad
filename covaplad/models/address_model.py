@@ -6,6 +6,9 @@ class Country(db.Model):
     name = db.Column(db.String(100), unique=True, nullable=False)
     provinces = db.relationship("Province", backref="country")
 
+    def __repr__(self):
+        return f"Country(name='{self.name}')"
+
 
 class Province(db.Model):
     # !Assuming a country cannot have provinces of same name
@@ -16,6 +19,9 @@ class Province(db.Model):
     country_id = db.Column(db.Integer, db.ForeignKey("country.id"), nullable=False)
 
     districts = db.relationship("District", backref="province")
+
+    def __repr__(self):
+        return f"Province(name='{self.name}')"
 
 
 class District(db.Model):
@@ -28,6 +34,9 @@ class District(db.Model):
 
     municipalities = db.relationship("Municipality", backref="district")
 
+    def __repr__(self):
+        return f"District(name='{self.name}')"
+
 
 class Municipality(db.Model):
     # !Assuming a district cannot have municipality of same name
@@ -39,6 +48,9 @@ class Municipality(db.Model):
 
     wards = db.relationship("Ward", backref="municipality")
 
+    def __repr__(self):
+        return f"Municipality(name='{self.name}')"
+
 
 class Ward(db.Model):
     __table_args__ = (db.UniqueConstraint("number", "municipality_id"),)
@@ -49,3 +61,6 @@ class Ward(db.Model):
     municipality_id = db.Column(
         db.Integer, db.ForeignKey("municipality.id"), nullable=False
     )
+
+    def __repr__(self):
+        return f"Ward(name='{self.name}')"
