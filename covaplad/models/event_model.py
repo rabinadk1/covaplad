@@ -7,6 +7,9 @@ class EventType(db.Model):
     description = db.Column(db.Text(), nullable=False)
     events = db.relationship("Event", backref="event_type")
 
+    def __repr__(self):
+        return f"EventType(name='{self.name}', description='{self.description}')"
+
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
