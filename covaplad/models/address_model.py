@@ -46,7 +46,6 @@ class Ward(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer, nullable=False)
 
-    name = db.Column(db.String(100))
     municipality_id = db.Column(
         db.Integer, db.ForeignKey("municipality.id"), nullable=False
     )
