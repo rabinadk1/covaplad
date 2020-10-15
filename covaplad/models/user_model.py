@@ -1,3 +1,5 @@
+from datetime import date
+
 import sqlalchemy_utils as su
 from flask_login import UserMixin
 
@@ -14,6 +16,11 @@ class User(db.Model, UserMixin):
 
     # address = db.Column(db.String(255))
     phone_number = db.Column(db.BigInteger)
+
+    # !might change to pk of Gender Table
+    gender = db.Column(db.String(12))
+
+    dob = db.Column(db.Date)
 
     # Makes database server automatically add 0 on default
     is_admin = db.Column(db.Boolean, server_default="0", nullable=False)
@@ -45,3 +52,8 @@ class User(db.Model, UserMixin):
             f"User(username='{self.username}', email='{self.email}', "
             f"phone_number='{self.phone_number}')"
         )
+
+    @property
+    def age(self):
+        # Provides approximate age by taking 365 days per year
+        return (date.now() - self.dob).days // 365
