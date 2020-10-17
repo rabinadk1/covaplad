@@ -19,10 +19,13 @@ class Volunteer(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
         db_column="id",
+        verbose_name="ID",
     )
-    start_date_time = models.DateTimeField()
-    end_date_time = models.DateTimeField()
-    interested_fields = models.CharField(max_length=100, blank=True)
+    start_date_time = models.DateTimeField("Start Date Time")
+    end_date_time = models.DateTimeField("End Date Time")
+    interested_fields = models.CharField(
+        "Interested Fields", max_length=100, blank=True
+    )
 
     skills = models.ManyToManyField(Skill)
     events = models.ManyToManyField(Event, through="VolunteerRegistration")

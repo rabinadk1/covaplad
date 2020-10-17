@@ -8,7 +8,7 @@ from donation_venue.models import DonationVenue
 
 class Disease(models.Model):
     name = models.CharField(max_length=100)
-    icd_code = models.CharField(max_length=10, unique=True)
+    icd_code = models.CharField("ICD Code", max_length=10, unique=True)
 
 
 class Donor(models.Model):
@@ -17,20 +17,21 @@ class Donor(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
         db_column="id",
+        verbose_name="ID",
     )
-    last_symptom_date = models.DateField("covid_last_symptom_date")
+    last_symptom_date = models.DateField("COVID Last Symptom Date")
 
     # !Store as AB+
-    blood_group = models.CharField(max_length=3)
-    test_report = models.TextField(blank=True)
+    blood_group = models.CharField("Blood Group", max_length=3)
+    test_report = models.TextField("Test Report", blank=True)
 
     height = models.DecimalField(
-        "height_in_feet",
+        "height (in feet)",
         max_digits=3,
         decimal_places=2,
     )
     weight = models.DecimalField(
-        "weight_in_kg",
+        "weight (in kg)",
         max_digits=3,
         decimal_places=2,
     )
