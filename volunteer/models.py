@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 
 from event.models import Event
@@ -15,7 +15,10 @@ class Skill(models.Model):
 
 class Volunteer(models.Model):
     id = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True, db_column="id"
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        db_column="id",
     )
     start_date_time = models.DateTimeField()
     end_date_time = models.DateTimeField()

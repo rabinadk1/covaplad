@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 
 from donation_venue.models import DonationVenue
@@ -13,7 +13,10 @@ class Disease(models.Model):
 
 class Donor(models.Model):
     id = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True, db_column="id"
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        db_column="id",
     )
     last_symptom_date = models.DateField("covid_last_symptom_date")
 

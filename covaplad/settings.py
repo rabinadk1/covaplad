@@ -27,10 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Extending Base User to add some fields
+AUTH_USER_MODEL = "user.User"
 
 # Application definition
 
 INSTALLED_APPS = [
+    "user.apps.UserConfig",
     "volunteer.apps.VolunteerConfig",
     "event.apps.EventConfig",
     "donor.apps.DonorConfig",
