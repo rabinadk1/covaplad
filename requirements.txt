@@ -1,16 +1,4 @@
-wheel==0.35.1
-flask==1.1.2
-flask_sqlalchemy==2.4.4
-PyMySQL==0.10.1
-sqlalchemy-utils==0.36.8
-passlib==1.7.4
-Flask-Migrate==2.5.3
-Flask-WTF==0.14.3
-Flask-Login==0.5.0
-is-safe-url==1.0
-
-# Dev Dependencies
-#! Better to install these globally using package manager
-flake8==3.8.4
-black==20.8b1
-isort==5.6.4
+asgiref==3.2.10
+Django==3.1.2
+pytz==2020.1
+sqlparse==0.4.1
