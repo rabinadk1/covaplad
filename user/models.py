@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from address.models import Ward
@@ -14,7 +15,9 @@ class User(AbstractUser):
     last_name = models.CharField("Last Name", max_length=100)
     email = models.EmailField("email address")
 
-    phone_number = models.BigIntegerField("Phone Number")
+    phone_number = models.BigIntegerField(
+        "Phone Number", validators=[MinValueValidator(100)]
+    )
     gender = models.CharField(
         max_length=1,
         choices=[
@@ -42,6 +45,13 @@ class User(AbstractUser):
         related_name="perm_user",
         verbose_name="Permanent Address",
     )
+
+    class Meta:
+        constraints = (
+            models.CheckConstraint(
+                check=models.Q(phone_number__gte=100), name="phone_number_gte_100"
+            ),
+        )
 
     # ! Overriden to incorporate middle_name
     def get_full_name(self):

@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from donation_venue.models import DonationVenue
@@ -32,11 +33,13 @@ class Donor(models.Model):
         "height (in feet)",
         max_digits=3,
         decimal_places=2,
+        validators=[MinValueValidator(0.02)],
     )
     weight = models.DecimalField(
         "weight (in kg)",
         max_digits=3,
         decimal_places=2,
+        validators=[MinValueValidator(0.02)],
     )
 
     diseases = models.ManyToManyField(Disease)
