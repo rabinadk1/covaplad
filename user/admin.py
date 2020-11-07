@@ -1,46 +1,42 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
 from .models import User
 
-
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ["username", "first_name", "middle_name", "last_name", "email"]
-
-
-class CustomUserChangeForm(UserChangeForm):
-    class Meta:
-        model = User
-        fields = ("email",)
+# Extract common fields outside
+personal_info = (
+    "Personal Information",
+    {
+        "classes": ("wide"),
+        "fields": (
+            "first_name",
+            "middle_name",
+            "last_name",
+            "phone_number",
+            "gender",
+            "dob",
+        ),
+    },
+)
+address_info = (
+    "Address Information",
+    {
+        "fields": (
+            "temporary_address",
+            "permanent_address",
+        )
+    },
+)
 
 
 # Register your models here.
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
-    model = User
+    # add_form = CustomUserCreationForm
     fieldsets = (
-        (None, {"fields": ("username", "password")}),
-        (
-            "Personal info",
-            {"fields": ("first_name", "middle_name", "last_name", "email")},
-        ),
-        (
-            "Extra Fields",
-            {
-                "fields": (
-                    "phone_number",
-                    "gender",
-                    "dob",
-                    "temporary_address",
-                    "permanent_address",
-                )
-            },
-        ),
+        (None, {"fields": ("username", "email", "password")}),
+        personal_info,
+        address_info,
         (
             "Permissions",
             {
@@ -57,36 +53,17 @@ class CustomUserAdmin(UserAdmin):
     )
 
     add_fieldsets = (
-        (None, {"fields": ("username", "password1", "password2", "email")}),
-        (
-            "Personal Information",
-            {
-                "classes": ("wide"),
-                "fields": (
-                    "first_name",
-                    "middle_name",
-                    "last_name",
-                    "phone_number",
-                    "gender",
-                    "dob",
-                ),
-            },
-        ),
-        (
-            "Address Information",
-            {
-                "fields": (
-                    "temporary_address",
-                    "permanent_address",
-                )
-            },
-        ),
+        (None, {"fields": ("username", "email", "password1", "password2")}),
+        personal_info,
+        address_info,
         (
             "Permissions",
             {
                 "fields": (
                     "is_staff",
                     "is_superuser",
+                    "groups",
+                    "user_permissions",
                 ),
             },
         ),

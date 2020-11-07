@@ -10,9 +10,12 @@ class Disease(models.Model):
     name = models.CharField(max_length=100)
     icd_code = models.CharField("ICD Code", max_length=10, unique=True)
 
+    def __str__(self):
+        return f"{self.icd_code} ({self.name})"
+
 
 class Donor(models.Model):
-    id = models.OneToOneField(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         primary_key=True,
@@ -49,12 +52,19 @@ class Donor(models.Model):
             ),
         )
 
+    def __str__(self):
+        return self.user.username
+
 
 class DonorRegistration(models.Model):
     donor = models.ForeignKey(Donor, on_delete=models.CASCADE)
     venue = models.ForeignKey(DonationVenue, on_delete=models.CASCADE)
+    did_donation = models.BooleanField(
+        "Check if the donor donated on the venue", default=False
+    )
 
     # ! Anything passed will be ignored with current datetime
     date_time = models.DateTimeField(auto_now=True)
 
-    did_donation = models.BooleanField(default=False)
+    class Meta:
+        verbose_name = "Donor Registration"

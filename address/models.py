@@ -9,6 +9,9 @@ class Country(models.Model):
     class Meta:
         verbose_name_plural = "countries"
 
+    def __str__(self):
+        return self.name
+
 
 class Province(models.Model):
     name = models.CharField(max_length=100)
@@ -20,6 +23,9 @@ class Province(models.Model):
                 fields=("name", "country"), name="unique_name_country"
             ),
         )
+
+    def __str__(self):
+        return f"{self.name}, {self.country}"
 
 
 class District(models.Model):
@@ -33,10 +39,14 @@ class District(models.Model):
             ),
         )
 
+    def __str__(self):
+        return f"{self.name}, {self.province}"
+
 
 class Municipality(models.Model):
     name = models.CharField(max_length=100)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
+    is_rural = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "municipalities"
@@ -46,6 +56,9 @@ class Municipality(models.Model):
                 fields=("name", "district"), name="unique_name_district"
             ),
         )
+
+    def __str__(self):
+        return f"{self.name}, {self.district}"
 
 
 class Ward(models.Model):
@@ -58,3 +71,7 @@ class Ward(models.Model):
                 fields=("number", "municipality"), name="unique_number_municiplaity"
             ),
         )
+
+    def __str__(self):
+        mun_name, rest = str(self.municipality).split(",", 1)
+        return ",".join((f"{mun_name}-{self.number}", rest))

@@ -13,3 +13,13 @@ class DonationVenue(models.Model):
 
     class Meta:
         verbose_name = "Donation Venue"
+
+        # !There cannot be donation venue with same name in same ward
+        constraints = (
+            models.UniqueConstraint(
+                fields=("name", "address"), name="unique_name_address"
+            ),
+        )
+
+    def __str__(self):
+        return f"{self.name}, {self.address}"

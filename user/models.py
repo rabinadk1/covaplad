@@ -9,12 +9,12 @@ from address.models import Ward
 # Create your models here.
 class User(AbstractUser):
     # !Overriding these fields because they could be blank
-    first_name = models.CharField(max_length=100)
-    middle_name = models.CharField(max_length=100, blank=True)
-    last_name = models.CharField(max_length=100)
+    first_name = models.CharField("First Name", max_length=100)
+    middle_name = models.CharField("Middle Name", max_length=100, blank=True)
+    last_name = models.CharField("Last Name", max_length=100)
     email = models.EmailField("email address")
 
-    phone_number = models.BigIntegerField()
+    phone_number = models.BigIntegerField("Phone Number")
     gender = models.CharField(
         max_length=1,
         choices=[
@@ -28,13 +28,19 @@ class User(AbstractUser):
         ],
     )
 
-    dob = models.DateField("date_of_birth")
+    dob = models.DateField("Date of Birth")
 
     temporary_address = models.ForeignKey(
-        Ward, on_delete=models.PROTECT, related_name="temp_user"
+        Ward,
+        on_delete=models.PROTECT,
+        related_name="temp_user",
+        verbose_name="Temporary Address",
     )
     permanent_address = models.ForeignKey(
-        Ward, on_delete=models.PROTECT, related_name="perm_user"
+        Ward,
+        on_delete=models.PROTECT,
+        related_name="perm_user",
+        verbose_name="Permanent Address",
     )
 
     # ! Overriden to incorporate middle_name

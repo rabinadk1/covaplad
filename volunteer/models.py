@@ -7,14 +7,15 @@ from event.models import Event
 
 
 class Skill(models.Model):
-    name = models.CharField(
-        max_length=100,
-    )
+    name = models.CharField(max_length=100, unique=True)
     details = models.TextField()
+
+    def __str__(self):
+        return self.name
 
 
 class Volunteer(models.Model):
-    id = models.OneToOneField(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         primary_key=True,
@@ -30,12 +31,19 @@ class Volunteer(models.Model):
     skills = models.ManyToManyField(Skill)
     events = models.ManyToManyField(Event, through="VolunteerRegistration")
 
+    def __str__(self):
+        return self.user.username
+
 
 class VolunteerRegistration(models.Model):
     volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    was_present = models.BooleanField(
+        "Check if the volunteer was present on the event", default=False
+    )
 
     # ! Anything passed will be ignored with current datetime
     date_time = models.DateTimeField(auto_now=True)
 
-    was_present = models.BooleanField(default=False)
+    class Meta:
+        verbose_name = "Volunteer Registration"
