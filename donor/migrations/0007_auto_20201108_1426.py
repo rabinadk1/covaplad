@@ -7,13 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('donor', '0006_auto_20201108_1146'),
+        ("donor", "0006_auto_20201108_1146"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='donor',
-            name='weight',
-            field=models.DecimalField(decimal_places=2, max_digits=5, validators=[django.core.validators.MinValueValidator(0.02)], verbose_name='weight (in kg)'),
+            model_name="donor",
+            name="weight",
+            field=models.DecimalField(
+                decimal_places=2,
+                max_digits=5,
+                validators=[django.core.validators.MinValueValidator(0.02)],
+                verbose_name="weight (in kg)",
+            ),
         ),
     ]
