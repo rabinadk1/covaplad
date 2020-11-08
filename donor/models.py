@@ -42,7 +42,7 @@ class Donor(models.Model):
         validators=[MinValueValidator(0.02)],
     )
 
-    diseases = models.ManyToManyField(Disease)
+    diseases = models.ManyToManyField(Disease, blank=True, null=True)
     venues = models.ManyToManyField(DonationVenue, through="DonorRegistration")
 
     class Meta:
