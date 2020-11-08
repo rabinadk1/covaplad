@@ -48,10 +48,10 @@ class Donor(models.Model):
     class Meta:
         constraints = (
             models.CheckConstraint(
-                check=models.Q(height__gt=0.01), name="height_gt_0.01"
+                check=models.Q(height__gt=0.01), name="donor_height_gt_0.01"
             ),
             models.CheckConstraint(
-                check=models.Q(weight__gt=0.01), name="weight_gt_0.01"
+                check=models.Q(weight__gt=0.01), name="donor_weight_gt_0.01"
             ),
         )
 

@@ -20,7 +20,7 @@ class Province(models.Model):
     class Meta:
         constraints = (
             models.UniqueConstraint(
-                fields=("name", "country"), name="unique_name_country"
+                fields=("name", "country"), name="province_unique_name_country"
             ),
         )
 
@@ -35,7 +35,7 @@ class District(models.Model):
     class Meta:
         constraints = (
             models.UniqueConstraint(
-                fields=("name", "province"), name="unique_name_province"
+                fields=("name", "province"), name="district_unique_name_province"
             ),
         )
 
@@ -53,7 +53,7 @@ class Municipality(models.Model):
 
         constraints = (
             models.UniqueConstraint(
-                fields=("name", "district"), name="unique_name_district"
+                fields=("name", "district"), name="municipality_unique_name_district"
             ),
         )
 
@@ -68,7 +68,8 @@ class Ward(models.Model):
     class Meta:
         constraints = (
             models.UniqueConstraint(
-                fields=("number", "municipality"), name="unique_number_municiplaity"
+                fields=("number", "municipality"),
+                name="ward_unique_number_municiplaity",
             ),
         )
 

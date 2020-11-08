@@ -49,7 +49,7 @@ class User(AbstractUser):
     class Meta:
         constraints = (
             models.CheckConstraint(
-                check=models.Q(phone_number__gte=100), name="phone_number_gte_100"
+                check=models.Q(phone_number__gte=100), name="user_phone_number_gte_100"
             ),
         )
 

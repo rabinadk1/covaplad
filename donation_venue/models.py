@@ -17,7 +17,7 @@ class DonationVenue(models.Model):
         # !There cannot be donation venue with same name in same ward
         constraints = (
             models.UniqueConstraint(
-                fields=("name", "address"), name="unique_name_address"
+                fields=("name", "address"), name="donationvenue_unique_name_address"
             ),
         )
 
