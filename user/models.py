@@ -22,7 +22,7 @@ class User(AbstractUser):
         max_length=1,
         choices=[
             ("M", "Male"),
-            ("W", "Woman"),
+            ("F", "Female"),
             ("L", "Lesbian"),
             ("G", "Gay"),
             ("B", "Bisexual"),

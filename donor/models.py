@@ -37,7 +37,7 @@ class Donor(models.Model):
     )
     weight = models.DecimalField(
         "weight (in kg)",
-        max_digits=3,
+        max_digits=5,
         decimal_places=2,
         validators=[MinValueValidator(0.02)],
     )
