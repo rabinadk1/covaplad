@@ -15,7 +15,7 @@ class User(AbstractUser):
     last_name = models.CharField("Last Name", max_length=100)
     email = models.EmailField("email address")
 
-    phone_number = models.BigIntegerField(
+    phone_number = models.PositiveBigIntegerField(
         "Phone Number", validators=[MinValueValidator(100)]
     )
     gender = models.CharField(
