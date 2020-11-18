@@ -2,8 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-# TODO: Display only respective attributes after adding json fetching routes
-
 
 class Country(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -27,8 +25,8 @@ class Province(models.Model):
         )
 
     def __str__(self):
-        return f"{self.name}, {self.country}"
-        # return self.name
+        # return f"{self.name}, {self.country}"
+        return self.name
 
 
 class District(models.Model):
@@ -43,8 +41,8 @@ class District(models.Model):
         )
 
     def __str__(self):
-        return f"{self.name}, {self.province}"
-        # return self.name
+        # return f"{self.name}, {self.province}"
+        return self.name
 
 
 class Municipality(models.Model):
@@ -62,8 +60,8 @@ class Municipality(models.Model):
         )
 
     def __str__(self):
-        return f"{self.name}, {self.district} ({self.type})"
-        # return f"{self.name} ({self.type})"
+        # return f"{self.name}, {self.district} ({self.type})"
+        return f"{self.name} ({self.type})"
 
     @property
     def type(self) -> str:
@@ -83,6 +81,6 @@ class Ward(models.Model):
         )
 
     def __str__(self):
-        mun_name, rest = str(self.municipality).split(",", 1)
-        return ",".join((f"{mun_name}-{self.number}", rest))
-        # return str(self.number)
+        # mun_name, rest = str(self.municipality).split(",", 1)
+        # return ",".join((f"{mun_name}-{self.number}", rest))
+        return str(self.number)
