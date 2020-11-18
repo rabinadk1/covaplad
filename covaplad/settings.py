@@ -33,12 +33,13 @@ AUTH_USER_MODEL = "user.User"
 # Application definition
 
 INSTALLED_APPS = [
-    "user.apps.UserConfig",
-    "volunteer.apps.VolunteerConfig",
-    "event.apps.EventConfig",
-    "donor.apps.DonorConfig",
-    "donation_venue.apps.DonationVenueConfig",
-    "address.apps.AddressConfig",
+    "user",
+    "volunteer",
+    "event",
+    "donor",
+    "donation_venue",
+    "address",
+    "crispy_forms",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -62,7 +63,7 @@ ROOT_URLCONF = "covaplad.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -129,3 +130,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# Custom variables #
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {"django.db.backends": {"level": "DEBUG", "handlers": ["console"]}},
+}
