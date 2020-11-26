@@ -32,4 +32,19 @@ def login_user(request: HttpRequest):
 
 def logout_user(request: HttpRequest):
     logout(request)
+    messages.info(request, "Successfully logged out")
     return redirect("home")
+
+
+def register_user(request: HttpRequest):
+    form = forms.SignupForm(request.POST or None)
+    if form.is_valid():
+        messages.info(request, "You have registered successfully. Login to continue.")
+        form.save()
+        return redirect("login")
+
+    return render(
+        request,
+        "signup.html",
+        {"form": form},
+    )
