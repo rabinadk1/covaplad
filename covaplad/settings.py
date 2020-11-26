@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "donor",
     "donation_venue",
     "address",
+    "main",
     "crispy_forms",
     "django.contrib.admin",
     "django.contrib.auth",

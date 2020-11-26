@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -23,10 +23,10 @@
         </style>
     </head>
 
-    <body>
+    <body class="d-flex flex-column h-100">
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0e7e5b;">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">COVAPLAD</a>
+              <a class="navbar-brand" href="{% url 'home' %}">COVAPLAD</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -39,17 +39,45 @@
                     <a class="nav-link" href="#">Donation Center</a>
                   </li>
                 </ul>
+                {% if user.is_authenticated %}
                 <div class="d-flex">
-                  <a href="#" class="btn btn-info">Username</a>
+                  <a href="#" class="btn btn-info">{{ user.username }}</a>
                 </div>
+                <div class="d-flex">
+                    <a href="{% url 'logout' %}" class="btn btn-info">Logout</a>
+                </div>
+
+                {% else %}
+                <div class="d-flex">
+                    <a href="{% url 'login' %}" class="btn btn-info">Login</a>
+                </div>
+                {%  endif %}
               </div>
             </div>
           </nav>
-        <div class="container">
-            {% block content %}
-            {% endblock %}
+        <main class="flex-shrink-0">
+            <div class="container">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% block content %}
+                {% endblock %}
 
-        </div>
+            </div>
+        </main>
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container">
+                <span class="text-muted"><small>&copy; Copyright
+                    <script type="text/JavaScript">
+                        document.write(new Date().getFullYear());
+                    </script>, COVAPLAD</small>
+                </span>
+            </div>
+        </footer>
         <!-- JavaScript Bundle with Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"
