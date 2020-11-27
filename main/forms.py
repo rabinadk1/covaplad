@@ -27,6 +27,6 @@ class SignupForm(UserCreationForm):
             "permanent_address",
         )
         widgets = {
-            "password1": forms.PasswordInput(),
-            "password2": forms.PasswordInput(),
+            "password1": forms.PasswordInput(attrs={"class": "form-control"}),
+            "password2": forms.PasswordInput(attrs={"class": "form-control"}),
         }
