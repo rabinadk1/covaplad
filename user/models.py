@@ -6,6 +6,16 @@ from django.db import models
 
 from address.models import Ward
 
+GENDER_CHOICES = {
+    "M": "Male",
+    "F": "Female",
+    "L": "Lesbian",
+    "G": "Gay",
+    "B": "Bisexual",
+    "T": "Transgender",
+    "N": "Prefer Not To Say",
+}
+
 
 # Create your models here.
 class User(AbstractUser):
@@ -13,23 +23,12 @@ class User(AbstractUser):
     first_name = models.CharField("First Name", max_length=100)
     middle_name = models.CharField("Middle Name", max_length=100, blank=True)
     last_name = models.CharField("Last Name", max_length=100)
-    email = models.EmailField("email address")
+    email = models.EmailField("email address", unique=True)
 
     phone_number = models.PositiveBigIntegerField(
         "Phone Number", validators=[MinValueValidator(100)]
     )
-    gender = models.CharField(
-        max_length=1,
-        choices=[
-            ("M", "Male"),
-            ("F", "Female"),
-            ("L", "Lesbian"),
-            ("G", "Gay"),
-            ("B", "Bisexual"),
-            ("T", "Transgender"),
-            ("N", "Prefer Not To Say"),
-        ],
-    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES.items())
 
     dob = models.DateField("Date of Birth")
 
@@ -50,6 +49,10 @@ class User(AbstractUser):
         constraints = (
             models.CheckConstraint(
                 check=models.Q(phone_number__gte=100), name="user_phone_number_gte_100"
+            ),
+            models.CheckConstraint(
+                check=models.Q(gender__in=GENDER_CHOICES.keys()),
+                name="user_gender_in_valid_choices",
             ),
         )
 
