@@ -133,14 +133,14 @@
     <body class="d-flex flex-column h-100">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" style="color:#E11B22;font-weight:bold;" href="{% url 'home' %}">COVAPLAD</a>
+              <a class="navbar-brand" style="color:#008000;font-weight:bold;" href="{% url 'home' %}">COVAPLAD</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-nav mr-auto mb-2 mb-lg-0">
-                    <a class="nav-link" style="color:#E11B22; " aria-current="page" href="#">Events</a>
-                    <a class="nav-link " style="color:#E11B22;" href="#">Donation Center</a>
+                    <a class="nav-link" style="color:#008000; " aria-current="page" href="#">Events</a>
+                    <a class="nav-link " style="color:#008000;" href="#">Donation Center</a>
                 </div>
                 {% if user.is_authenticated %}
                 <div class="d-flex">
@@ -152,10 +152,10 @@
 
                 {% else %}
                 <div class="d-flex" >
-                    <a href="{% url 'login' %}" class="btn btn-outline-danger mr-2" >Login</a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-success mr-2" >Login</a>
                 </div>
                 <div class="d-flex">
-                    <a href="{% url 'signup' %}" class="btn btn-danger" >Signup</a>
+                    <a href="{% url 'signup' %}" class="btn btn-success" >Signup</a>
                 </div>
                 {%  endif %}
               </div>
