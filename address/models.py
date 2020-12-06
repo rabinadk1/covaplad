@@ -61,11 +61,11 @@ class Municipality(models.Model):
 
     def __str__(self):
         # return f"{self.name}, {self.district} ({self.type})"
-        return f"{self.name} ({self.type})"
+        return f"{self.name} {self.type}"
 
     @property
     def type(self) -> str:
-        return "Rural" if self.is_rural else "Urban"
+        return "Gaunpalika" if self.is_rural else "Nagarpalika"
 
 
 class Ward(models.Model):

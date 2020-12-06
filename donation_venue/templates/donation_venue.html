@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %} - {{donation_venue.name}} {% endblock title%}
+{% block content %}
+<main>
+    <div class="container">
+        <h3>{{ donation_venue.name }}</h3>
+        <p>Email: {{donation_venue.email}}</p>
+        <p>Email: {{donation_venue.phone_number}}</p>
+        <p>
+            Address:
+            {{donation_venue.address.municipality}} - {{donation_venue.address}}, {{donation_venue.address.municipality.district}}, {{donation_venue.address.municipality.district.province}}
+        </p>
+
+        <a href="{% url 'get_donation_venue_list' %}">All Venues</a>
+
+    </div>
+</main>
+{% endblock content %}
