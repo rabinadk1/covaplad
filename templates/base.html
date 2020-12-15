@@ -127,6 +127,10 @@
         margin-top: 7rem;
       }
     }
+
+    .asteriskField {
+        color: red;
+    }
   </style>
     </head>
 
@@ -138,7 +142,7 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <div class="navbar-nav me-auto mb-2 mb-lg-0">
                     <a class="nav-link" style="color:#008000; " aria-current="page" href="#">Events</a>
                     <a class="nav-link " style="color:#008000;" href="#">Donation Center</a>
                 </div>
@@ -152,7 +156,7 @@
 
                 {% else %}
                 <div class="d-flex" >
-                    <a href="{% url 'login' %}" class="btn btn-outline-success mr-2" >Login</a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-success me-2" >Login</a>
                 </div>
                 <div class="d-flex">
                     <a href="{% url 'signup' %}" class="btn btn-success" >Signup</a>
