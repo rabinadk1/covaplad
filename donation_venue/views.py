@@ -1,10 +1,9 @@
-# from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpRequest
 from django.shortcuts import render
 
 from . import models
+
+# Create your views here.
 
 
 def get_donation_venue_list(request: HttpRequest):
