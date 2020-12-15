@@ -14,7 +14,7 @@
 
 <form class="p-4" action="{% url 'signup' %}" method="post">
   {% csrf_token %}
-  {{ signup_form|crispy }}
+  {{signup_form|crispy }}
   <h2>Temporary Address</h2>
   {{ temporary_address_form|crispy }}
   <h2>Permanent Address</h2>
