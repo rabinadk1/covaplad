@@ -2,7 +2,6 @@
   // Format on save
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
-
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
   "python.formatting.provider": "black",
@@ -16,5 +15,6 @@
   "prettier.disableLanguages": [
     "html"
   ],
-  "prettier.enable": false
+  "prettier.enable": false,
+  "python.pythonPath": ".venv/bin/python3"
 }

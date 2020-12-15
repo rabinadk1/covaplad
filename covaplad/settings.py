@@ -86,7 +86,7 @@ WSGI_APPLICATION = "covaplad.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "OPTIONS": {"read_default_file": "database.conf"},
+        "OPTIONS": {"read_default_file": "./database.conf"},
     }
 }
 
