@@ -138,14 +138,14 @@
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
               <a class="navbar-brand" style="color:#008000;font-weight:bold;" href="{% url 'home' %}">COVAPLAD</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                   aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <a class="nav-link" style="color:#008000; " aria-current="page" href="#">Events</a>
+                    <a class="nav-link" style="color:#008000; " aria-current="page" href="{% url 'get_event_list' %}">Events</a>
                     <a class="nav-link " style="color:#008000;" href="{% url 'get_donation_venue_list' %}">Donation Center</a>
                 </div>
                 {% if user.is_authenticated %}

@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Column, Div, Field, Layout
+from crispy_forms.layout import HTML, Column, Div, Layout
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
@@ -33,7 +33,7 @@ class SignupForm(UserCreationForm):
             "last_name",
             "phone_number",
             "gender",
-            "dob"
+            "dob",
         )
         widgets = {
             "password1": forms.PasswordInput(attrs={"class": "form-control"}),

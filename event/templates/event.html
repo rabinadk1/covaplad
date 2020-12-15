@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %} - {{event.name}} {% endblock title%}
+{% block content %}
+<main>
+    <div class="container">
+        <h3>{{ event.name }}</h3>
+        <p>Start Date: {{event.start}}</p>
+        <p>End Date: {{event.end}}</p>
+        <span>Event Type: {{event.event_type.name}}</span><span>({{event.event_type.description}} )</span>
+        <p>
+            Address:
+            {{event.address.municipality}} - {{event.address}}, {{event.address.municipality.district}}, {{event.address.municipality.district.province}}
+        </p>
+
+        <a href="{% url 'get_event_list' %}">All Events</a>
+
+    </div>
+</main>
+{% endblock content %}

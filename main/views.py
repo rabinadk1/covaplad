@@ -40,10 +40,14 @@ def logout_user(request: HttpRequest):
 
 def register_user(request: HttpRequest):
     signup_form = forms.SignupForm(request.POST or None)
-    temporary_address_form = AddressForm(request.POST or None,prefix="temporary")
-    permanent_address_form = AddressForm(request.POST or None,prefix="permanent")
+    temporary_address_form = AddressForm(request.POST or None, prefix="temporary")
+    permanent_address_form = AddressForm(request.POST or None, prefix="permanent")
     print(temporary_address_form.is_valid())
-    if signup_form.is_valid() and temporary_address_form.is_valid() and permanent_address_form.is_valid():
+    if (
+        signup_form.is_valid()
+        and temporary_address_form.is_valid()
+        and permanent_address_form.is_valid()
+    ):
         messages.info(request, "You have registered successfully. Login to continue.")
         signup = signup_form.save(False)
         signup.temporary_address = temporary_address_form.cleaned_data.get("ward")
@@ -54,5 +58,9 @@ def register_user(request: HttpRequest):
     return render(
         request,
         "signup.html",
-        {"signup_form": signup_form,"temporary_address_form":temporary_address_form, "permanent_address_form":permanent_address_form},
+        {
+            "signup_form": signup_form,
+            "temporary_address_form": temporary_address_form,
+            "permanent_address_form": permanent_address_form,
+        },
     )

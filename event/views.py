@@ -17,7 +17,7 @@ def get_event_list(request: HttpRequest):
     return render(request, "events.html", context=context)
 
 
-def get_event(request: HttpRequest, venue_id):
-    event = models.Event.objects.get(id=venue_id)
+def get_event(request: HttpRequest, event_id):
+    event = models.Event.objects.get(id=event_id)
     context = {"event": event}
     return render(request, "event.html", context=context)
