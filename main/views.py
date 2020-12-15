@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
+from address.forms import AddressForm
+
 from . import forms
 
 # Create your views here.
@@ -37,14 +39,20 @@ def logout_user(request: HttpRequest):
 
 
 def register_user(request: HttpRequest):
-    form = forms.SignupForm(request.POST or None)
-    if form.is_valid():
+    signup_form = forms.SignupForm(request.POST or None)
+    temporary_address_form = AddressForm(request.POST or None)
+    permanent_address_form = AddressForm(request.POST or None)
+    print(temporary_address_form.is_valid())
+    if signup_form.is_valid() and temporary_address_form.is_valid() and permanent_address_form.is_valid():
         messages.info(request, "You have registered successfully. Login to continue.")
-        form.save()
+        signup = signup_form.save(False)
+        signup.temporary_address = temporary_address_form.cleaned_data.get("ward")
+        signup.permanent_address = permanent_address_form.cleaned_data.get("ward")
+        signup.save()
         return redirect("login")
 
     return render(
         request,
         "signup.html",
-        {"form": form},
+        {"signup_form": signup_form,"temporary_address_form":temporary_address_form, "permanent_address_form":permanent_address_form},
     )

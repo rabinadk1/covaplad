@@ -33,9 +33,7 @@ class SignupForm(UserCreationForm):
             "last_name",
             "phone_number",
             "gender",
-            "dob",
-            "temporary_address",
-            "permanent_address",
+            "dob"
         )
         widgets = {
             "password1": forms.PasswordInput(attrs={"class": "form-control"}),
@@ -73,6 +71,4 @@ class SignupForm(UserCreationForm):
                 Column("phone_number", css_class="form-group col-md-4 mb-1"),
                 css_class="row",
             ),
-            Field("temporary_address", css_class="form-group col-md-4 mb-1"),
-            Field("permanent_address", css_class="form-group col-md-4 mb-1"),
         )

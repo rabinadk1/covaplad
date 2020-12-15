@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load crispy_forms_field %}
-
+{% load static %}
 {% block title %}
 - Register
 {% endblock title %}
@@ -14,8 +14,15 @@
 
 <form class="p-4" action="{% url 'signup' %}" method="post">
   {% csrf_token %}
-  {% crispy form %}
-  <button class="btn btn-success ms-4" type="submit">Sign up</button>
+  {{ signup_form|crispy }}
+  <h2>Temporary Address</h2>
+  {{ temporary_address_form|crispy }}
+  <h2>Permanent Address</h2>
+    {{ permanent_address_form|crispy }}
+  <button class="btn btn-success ml-4" type="submit">Sign up</button>
 </form>
 </div>
 {% endblock content %}
+{% block script %}
+<script src="{% static 'js/fetchAddress.js' %}"></script>
+{% endblock script %}
