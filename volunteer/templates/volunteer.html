@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %} - volunteer {% endblock title%}
+{% block content %}
+    <div class="container">
+            <div class="container">
+                {% if user.is_authenticated %}
+                    {% if user.volunteer %}
+                            {% if user.volunteer.events.all|length < 1 %}
+                            <div class="jumbotron m-4 text-center text-dark">
+                                <h1 class="display-4 text-success">Visit our Volunteering Events today.</h1>
+                            </div>
+                            {% else %}
+                                <div class="jumbotron m-4 text-center text-dark">
+                                    <h1 class="text-success">Thank you for joining us in the fight against COVID-19.</h1>
+                                    <div class="d-grid gap-2 col-4 mx-auto text-center">
+                                            <p class="fw-bold text-primary">
+                                            Find out where to volunteer <a href="{% url 'get_event_list' %}" class="alert-link fst-italic">here.</a>
+                                            </p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="text-dark">Here are the volunteering events where you have registered.</h5 class="text-dark">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped align-middle text-center">
+                                            <thead class="bg-success text-white">
+                                                <tr>
+                                                    <th class="align-middle">#</th>
+                                                    <th class="align-middle">Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for event in user.volunteer.events.all %}
+                                                    <tr>
+                                                        <td>{{forloop.counter}}</td>
+                                                        <td>
+                                                            <a href="{% url 'get_event' event_id=event.id %}" class="text-dark text-decoration-none">
+                                                                {{event.name}}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            {% endif %}
+                    {% else %}
+                        <div class="jumbotron m-4 text-center text-dark">
+                            <h1 class="display-4 text-success">Become a COVID-19 Volunteer</h1>
+                            <p class="lead">
+                                Join the fight against COVID-19 by participating in various social events as a volunteer.
+                            </p>
+
+                            <div class="d-grid gap-2 col-4 mx-auto text-center">
+                                        <p class="fw-bold text-primary">
+                                    Find out where to volunteer <a href="{% url 'get_event_list' %}" class="alert-link fst-italic">here.</a>
+                                    </p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="p-2 m-2">
+                            <div class="d-grid gap-2 col-4 mx-auto">
+                                <a href="{% url 'volunteer_registration' %}" class="btn btn-danger btn-lg">
+                                    Register as a Volunteer
+                                </a>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                {% else %}
+                    <div class="jumbotron m-4 text-center text-dark">
+                        <h1 class="display-4 text-success">Become a COVID-19 Volunteer</h1>
+                        <p class="lead">
+                            Join the fight against COVID-19 by participating in various social events as a volunteer.
+                        </p>
+
+                        <div class="d-grid gap-2 col-4 mx-auto text-center">
+                                <p class="fw-bold text-primary">
+                                Find out where to volunteer <a href="{% url 'get_event_list' %}" class="alert-link fst-italic">here.</a>
+                                </p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="p-2 m-2">
+                        <div class="d-grid gap-2 col-4 mx-auto">
+                            <a href="{% url 'volunteer_registration' %}" class="btn btn-danger btn-lg">
+                                Register as a Volunteer
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+    </div>
+{% endblock content %}
