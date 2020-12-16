@@ -85,4 +85,4 @@ class TestReport(models.Model):
         verbose_name = "Test Report"
 
     def __str__(self):
-        return self.report
+        return self.report.name

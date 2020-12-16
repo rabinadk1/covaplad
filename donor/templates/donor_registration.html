@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}
- - Donor Registration
+- Donor Registration
 {% endblock title %}
 
 {% block content %}
-    <div class="d-flex justify-content-center align-items-center vh-100" style="background:linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('https://s19538.pcdn.co/wp-content/uploads/2020/03/helping-hands.jpg'); background-size: contain;">
-        <div class="card shadow p-3 mb-5 bg-white rounded">
-			<div class="card-header">
-				<h3 style="color:#008000;">Donor Registration</h3>
-			</div>
+<div class="d-flex justify-content-center align-items-center vh-100"
+    style="background:linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('https://s19538.pcdn.co/wp-content/uploads/2020/03/helping-hands.jpg'); background-size: contain;">
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-header">
+            <h3 style="color:#008000;">Donor Registration</h3>
+        </div>
 
-            <div class="card-body">
-            <form action="{% url 'donor_registration' %}"  method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <form action="{% url 'donor_registration' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <button class="btn btn-success mt-1" type="submit">Register</button>
             </form>
         </div>
     </div>
+</div>
 {% endblock content %}

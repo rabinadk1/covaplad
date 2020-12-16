@@ -1,27 +1,26 @@
 {% extends "base.html" %}
 {% block title %} -Blood Donation {% endblock title%}
 {% block content %}
-<main>
+<div class="container">
     <h1 class="text-center">Blood Donation Venues</h1>
     <div class="table-responsive">
-    <table class="table table-striped table-hover table-bordered align-middle text-center">
-        <thead class="bg-success text-white">
-            <tr>
-                <th scope="col" rowspan="2" class="align-middle">#</th>
-                <th scope="col" rowspan="2" class="align-middle">Name</th>
-                <th scope="col" rowspan="2" class="align-middle">Phone number</th>
-                <th scope="col" colspan="3">Address</th>
-            </tr>
-            <tr class="bg-success">
-                <th>Municipality</th>
-                <th>District</th>
-                <th>Province</th>
-            </tr>
-        </thead>
+        <table class="table table-striped table-hover table-bordered align-middle text-center">
+            <thead class="bg-success text-white">
+                <tr>
+                    <th scope="col" rowspan="2" class="align-middle">SN</th>
+                    <th scope="col" rowspan="2" class="align-middle">Name</th>
+                    <th scope="col" rowspan="2" class="align-middle">Phone number</th>
+                    <th scope="col" colspan="3">Address</th>
+                </tr>
+                <tr class="bg-success">
+                    <th>Municipality</th>
+                    <th>District</th>
+                    <th>Province</th>
+                </tr>
+            </thead>
 
-
-        <tbody>
-            {% for donation_venue in donation_venues%}
+            <tbody>
+                {% for donation_venue in donation_venues%}
                 <tr>
                     <td>
                         {{ forloop.counter }}
@@ -44,9 +43,9 @@
                         {{ donation_venue.address.municipality.district.province }}
                     </td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-</main>
+</div>
 {% endblock content %}
