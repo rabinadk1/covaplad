@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from . import forms, models
+from . import forms
+from .models import TestReport
 
 # Create your views here.
 
@@ -17,12 +18,15 @@ def donor_registration(request: HttpRequest):
                 donor = form.save(commit=False)
                 donor.user = user
                 donor.save()
+                # Saving only after donor is saved
+                for img in request.FILES.getlist("test_reports"):
+                    TestReport(donor=donor, report=img).save()
                 return redirect("donor_registration")
         else:
             form = forms.DonorForm()
 
         return render(request, "donor_registration.html", {"form": form})
     else:
-        donor = models.Donor.objects.get(user=user)
+        # donor = models.Donor.objects.get(user=user)
         print("Already a donor")
         return render(request, "donor_registration.html")
