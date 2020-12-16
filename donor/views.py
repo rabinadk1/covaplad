@@ -8,6 +8,10 @@ from .models import TestReport
 # Create your views here.
 
 
+def donor(request: HttpRequest):
+    return render(request, "donor.html")
+
+
 @login_required(redirect_field_name="next")
 def donor_registration(request: HttpRequest):
     user = request.user

@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %} - Donor {% endblock title%}
+{% block content %}
+    <div class="container">
+            <div class="container">
+                {% if user.is_authenticated %}
+                    {% if user.donor %}
+                            {% if user.donor.venues.all|length < 1 %}
+                            <div class="jumbotron m-4 text-center text-dark">
+                                <h1 class="display-4 text-success">Visit our Plasma Donation Sites today.</h1>
+                                <div class="d-grid gap-2 col-4 mx-auto text-center">
+                                    <p class="fw-bold text-primary">
+                                    Find out where to donate plasma <a href="{% url 'get_donation_venue_list' %}" class="alert-link fst-italic">here.</a>
+                                    </p>
+                                </div>
+                            </div>
+                            {% else %}
+                                <div class="jumbotron m-4 text-center text-dark">
+                                    <h1 class="text-success">Thank you for joining us in the fight against COVID-19.</h1>
+                                    <div class="d-grid gap-2 col-4 mx-auto text-center">
+                                        <p class="fw-bold text-primary">
+                                        Find out where to donate plasma <a href="{% url 'get_donation_venue_list' %}" class="alert-link fst-italic">here.</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="text-dark">Here are the donation venues where you have registered.</h5 class="text-dark">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped align-middle text-center">
+                                            <thead class="bg-success text-white">
+                                                <tr>
+                                                    <th class="align-middle">#</th>
+                                                    <th class="align-middle">Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for donation_venue in user.donor.venues.all %}
+                                                    <tr>
+                                                        <td>{{forloop.counter}}</td>
+                                                        <td>
+                                                            <a href="{% url 'get_donation_venue' venue_id=donation_venue.id %}" class="text-dark text-decoration-none">
+                                                                {{donation_venue.name}}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            {% endif %}
+                    {% else %}
+                        <div class="jumbotron m-4 text-center text-dark">
+                            <h1 class="display-4 text-success">Become a Plasma Donor</h1>
+                            <p class="lead">
+                                If you have fully recovered from COVID-19, you may be able to help patients currently fighting the infection by donating your plasma.
+                            </p>
+
+                            <div class="d-grid gap-2 col-4 mx-auto text-center">
+                                        <p class="fw-bold text-primary">
+                                    Find out where to donate plasma <a href="{% url 'get_donation_venue_list' %}" class="alert-link fst-italic">here.</a>
+                                    </p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card d-grid col-9 mx-auto">
+                            <div class="card-body text-dark">
+                                <div class="p-2 m-2">
+                                    <h5 class="card-title fs-4">
+                                        I Have Fully Recovered From COVID-19. Am I Eligible to Donate Plasma?
+                                    </h5>
+                                    <span>
+                                        <p class="card-text lh-lg">
+                                            People who have fully recovered from COVID-19 for at least two weeks
+                                            are encouraged to consider donating plasma, which may help save the
+                                            lives of other patients. COVID-19 convalescent plasma must only be
+                                            collected from recovered individuals if they are eligible to donate blood.
+                                            Individuals must have had a prior diagnosis of COVID-19 documented by a
+                                            laboratory test and meet other donor qualifications. Individuals must
+                                            have complete resolution of symptoms for at least 14 days prior to
+                                            donation. A negative lab test for active COVID-19 disease is not necessary
+                                            to qualify for donation.
+                                        </p>
+                                    </span>
+                                </div>
+                                <div class="p-2 m-2">
+                                    <div class="d-grid gap-2 col-4 mx-auto">
+                                        <a href="{% url 'donor_registration' %}" class="btn btn-danger btn-lg">
+                                            Register as a Donor
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    {% endif %}
+                {% else %}
+                    <div class="jumbotron m-4 text-center text-dark">
+                        <h1 class="display-4 text-success">Become a Plasma Donor</h1>
+                        <p class="lead">
+                            If you have fully recovered from COVID-19, you may be able to help patients currently fighting the infection by donating your plasma.
+                        </p>
+
+                        <div class="d-grid gap-2 col-4 mx-auto text-center">
+                                <p class="fw-bold text-primary">
+                                Find out where to donate plasma <a href="{% url 'get_donation_venue_list' %}" class="alert-link fst-italic">here.</a>
+                                </p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card d-grid col-9 mx-auto">
+                        <div class="card-body text-dark">
+                            <div class="p-2 m-2">
+                                <h5 class="card-title fs-4">
+                                    I Have Fully Recovered From COVID-19. Am I Eligible to Donate Plasma?
+                                </h5>
+                                <span>
+                                    <p class="card-text lh-lg">
+                                        People who have fully recovered from COVID-19 for at least two weeks
+                                        are encouraged to consider donating plasma, which may help save the
+                                        lives of other patients. COVID-19 convalescent plasma must only be
+                                        collected from recovered individuals if they are eligible to donate blood.
+                                        Individuals must have had a prior diagnosis of COVID-19 documented by a
+                                        laboratory test and meet other donor qualifications. Individuals must
+                                        have complete resolution of symptoms for at least 14 days prior to
+                                        donation. A negative lab test for active COVID-19 disease is not necessary
+                                        to qualify for donation.
+                                    </p>
+                                </span>
+                            </div>
+                            <div class="p-2 m-2">
+                                <div class="d-grid gap-2 col-4 mx-auto">
+                                    <a href="{% url 'donor_registration' %}" class="btn btn-danger btn-lg">
+                                        Register as a Donor
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+    </div>
+{% endblock content %}
