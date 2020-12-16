@@ -8,26 +8,28 @@
 {% endblock title %}
 
 {% block content %}
-{% comment %}
-<div>
-  <img src="https://img.pngio.com/volunteer-volunteer-png-676_261.png" width="100%" />
-</div>
-{% endcomment %}
-<form action="{% url 'signup' %}" method="post">
-  {% csrf_token %}
-  {{signup_form|crispy }}
-  <div class="row my-3">
-    <div class="col">
-      <h2>Temporary Address</h2>
-      {{ temporary_address_form|crispy }}
-    </div>
-    <div class="col">
-      <h2>Permanent Address</h2>
-      {{ permanent_address_form|crispy }}
-    </div>
+<div class="container">
+  {% comment %}
+  <div>
+    <img src="https://img.pngio.com/volunteer-volunteer-png-676_261.png" width="100%" />
   </div>
-  <button class="btn btn-success" type="submit">Sign up</button>
-</form>
+  {% endcomment %}
+  <form action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+    {{signup_form|crispy }}
+    <div class="row my-3">
+      <div class="col">
+        <h2>Temporary Address</h2>
+        {{ temporary_address_form|crispy }}
+      </div>
+      <div class="col">
+        <h2>Permanent Address</h2>
+        {{ permanent_address_form|crispy }}
+      </div>
+    </div>
+    <button class="btn btn-success" type="submit">Sign up</button>
+  </form>
+</div>
 {% endblock content %}
 
 {% block script %}
