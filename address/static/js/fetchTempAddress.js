@@ -1,18 +1,18 @@
 "use-strict";
 
-const country_select = document.getElementById("id_country");
+const country_select = document.getElementById("id_temporary-country");
 let country_last_value;
 
-const province_select = document.getElementById("id_province");
+const province_select = document.getElementById("id_temporary-province");
 let province_last_value;
 
-const district_select = document.getElementById("id_district");
+const district_select = document.getElementById("id_temporary-district");
 let district_last_value;
 
-const municipality_select = document.getElementById("id_municipality");
+const municipality_select = document.getElementById("id_temporary-municipality");
 let municipality_last_value;
 
-const ward_select = document.getElementById("id_ward");
+const ward_select = document.getElementById("id_temporary-ward");
 let ward_last_value;
 
 const helper = async (name, cause, effect, last_value, callback) => {
