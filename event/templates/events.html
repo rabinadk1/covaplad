@@ -1,29 +1,28 @@
 {% extends "base.html" %}
 {% block title %} - Events {% endblock title%}
 {% block content %}
-<main>
+<div class="container">
     <h1 class="text-center">Event Venues</h1>
     <div class="table-responsive">
-    <table class="table table-striped table-hover table-bordered align-middle text-center">
-        <thead class="bg-success text-white">
-            <tr>
-                <th scope="col" rowspan="2" class="align-middle">#</th>
-                <th scope="col" rowspan="2" class="align-middle">Name</th>
-                <th scope="col" rowspan="2" class="align-middle">Start Date</th>
-                <th scope="col" rowspan="2" class="align-middle">End Date</th>
-                <th scope="col" rowspan="2" class="align-middle">Event Type</th>
-                <th scope="col" colspan="3">Address</th>
-            </tr>
-            <tr class="bg-success">
-                <th>Municipality</th>
-                <th>District</th>
-                <th>Province</th>
-            </tr>
-        </thead>
+        <table class="table table-striped table-hover table-bordered align-middle text-center">
+            <thead class="bg-success text-white">
+                <tr>
+                    <th scope="col" rowspan="2" class="align-middle">SN</th>
+                    <th scope="col" rowspan="2" class="align-middle">Name</th>
+                    <th scope="col" rowspan="2" class="align-middle">Start Date</th>
+                    <th scope="col" rowspan="2" class="align-middle">End Date</th>
+                    <th scope="col" rowspan="2" class="align-middle">Event Type</th>
+                    <th scope="col" colspan="3">Address</th>
+                </tr>
+                <tr class="bg-success">
+                    <th>Municipality</th>
+                    <th>District</th>
+                    <th>Province</th>
+                </tr>
+            </thead>
 
-
-        <tbody>
-            {% for event in events%}
+            <tbody>
+                {% for event in events%}
                 <tr>
                     <td>
                         {{ forloop.counter }}
@@ -39,7 +38,7 @@
                     <td>
                         {{ event.end}}
                     </td>
-                      <td>
+                    <td>
                         {{ event.event_type.name}}
                     </td>
                     <td>
@@ -52,9 +51,9 @@
                         {{ event.address.municipality.district.province }}
                     </td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-</main>
+</div>
 {% endblock content %}
