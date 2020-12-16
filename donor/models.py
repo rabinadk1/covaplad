@@ -27,7 +27,9 @@ class Donor(models.Model):
 
     # !Store as AB+
     blood_group = models.CharField("Blood Group", max_length=3)
-    test_report = models.TextField("Test Report", blank=True)
+    test_report = models.ImageField(
+        "Test Report", upload_to="test_reports/", blank=True
+    )
 
     height = models.DecimalField(
         "height (in feet)",
@@ -70,4 +72,5 @@ class DonorRegistration(models.Model):
     date_time = models.DateTimeField(auto_now=True)
 
     class Meta:
+        unique_together = ["donor", "venue"]
         verbose_name = "Donor Registration"
