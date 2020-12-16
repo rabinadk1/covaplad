@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 
 from .models import Volunteer
@@ -5,6 +7,9 @@ from .models import Volunteer
 
 class VolunteerForm(forms.ModelForm):
     class Meta:
+        def getCurrentDateTime():
+            return datetime.now().isoformat(timespec="minutes")
+
         model = Volunteer
         fields = [
             "start_date_time",
@@ -12,3 +17,18 @@ class VolunteerForm(forms.ModelForm):
             "interested_fields",
             "skills",
         ]
+
+        widgets = {
+            "start_date_time": forms.widgets.DateTimeInput(
+                attrs={
+                    "type": "datetime-local",
+                    "max": getCurrentDateTime,
+                }
+            ),
+            "end_date_time": forms.widgets.DateTimeInput(
+                attrs={
+                    "type": "datetime-local",
+                    "max": getCurrentDateTime,
+                }
+            ),
+        }

@@ -40,7 +40,7 @@ class SignupForm(UserCreationForm):
         widgets = {
             "password1": forms.PasswordInput(attrs={"class": "form-control"}),
             "password2": forms.PasswordInput(attrs={"class": "form-control"}),
-            "dob": forms.widgets.DateInput(attrs={"type": "date", "max": date.today()}),
+            "dob": forms.widgets.DateInput(attrs={"type": "date", "max": date.today}),
         }
 
     def __init__(self, *args, **kwargs):
