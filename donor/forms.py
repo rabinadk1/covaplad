@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 
 from django import forms
 
@@ -7,6 +7,7 @@ from .models import Donor
 
 class DonorForm(forms.ModelForm):
     test_reports = forms.FileField(
+        label="Test Reports",
         widget=forms.ClearableFileInput(attrs={"multiple": True, "accept": "image/*"}),
         required=False,
     )
@@ -23,6 +24,10 @@ class DonorForm(forms.ModelForm):
 
         widgets = {
             "last_symptom_date": forms.widgets.DateInput(
-                attrs={"type": "date", "max": date.today()}
+                attrs={
+                    "type": "date",
+                    "min": lambda: date.today() - timedelta(28),
+                    "max": date.today,
+                }
             ),
         }
