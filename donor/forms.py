@@ -1,3 +1,5 @@
+from datetime import date
+
 from django import forms
 
 from .models import Donor
@@ -19,4 +21,8 @@ class DonorForm(forms.ModelForm):
             "diseases",
         ]
 
-        # widgets = {"diseases": forms.SelectMultiple()}
+        widgets = {
+            "last_symptom_date": forms.widgets.DateInput(
+                attrs={"type": "date", "max": date.today()}
+            ),
+        }

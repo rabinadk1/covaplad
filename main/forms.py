@@ -1,3 +1,5 @@
+from datetime import date
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Div, Layout
 from django import forms
@@ -38,7 +40,7 @@ class SignupForm(UserCreationForm):
         widgets = {
             "password1": forms.PasswordInput(attrs={"class": "form-control"}),
             "password2": forms.PasswordInput(attrs={"class": "form-control"}),
-            "dob": forms.DateInput(),
+            "dob": forms.widgets.DateInput(attrs={"type": "date", "max": date.today()}),
         }
 
     def __init__(self, *args, **kwargs):
