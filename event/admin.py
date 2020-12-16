@@ -10,7 +10,7 @@ from volunteer.models import VolunteerRegistration
 class VolunteerRegistrationInline(admin.TabularInline):
     model = VolunteerRegistration
     extra = 0
-    readonly_fields = 'link',
+    readonly_fields = ("link",)
 
     def link(self, instance):
         url = reverse("admin:volunteer_volunteer_change", args=(instance.id,))

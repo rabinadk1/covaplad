@@ -9,7 +9,7 @@ from donor.models import DonorRegistration
 class DonorRegistrationInline(admin.TabularInline):
     model = DonorRegistration
     extra = 0
-    readonly_fields = 'link',
+    readonly_fields = ("link",)
 
     def link(self, instance):
         url = reverse("admin:donor_donor_change", args=(instance.id,))
