@@ -22,13 +22,13 @@ class VolunteerForm(forms.ModelForm):
             "start_date_time": forms.widgets.DateTimeInput(
                 attrs={
                     "type": "datetime-local",
-                    "max": getCurrentDateTime,
+                    "min": getCurrentDateTime,
                 }
             ),
             "end_date_time": forms.widgets.DateTimeInput(
                 attrs={
                     "type": "datetime-local",
-                    "max": getCurrentDateTime,
+                    "min": getCurrentDateTime,
                 }
             ),
         }
