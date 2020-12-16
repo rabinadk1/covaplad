@@ -11,6 +11,19 @@
             Address:
             {{event.address.municipality}} - {{event.address}}, {{event.address.municipality.district}}, {{event.address.municipality.district.province}}
         </p>
+        {% if user.is_authenticated %}
+            {% if user.volunteer %}
+                {% if event in user.volunteer.events.all %}
+                    <p class="text-decoration-underline">Already Registered as a volunteer in this venue.</p>
+                {% else %}
+                    <a href="{% url 'event_registration' event_id=event.id %}" class="btn btn-outline-primary">Register as a Volunteer</a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'event_registration' event_id=event.id %}" class="btn btn-outline-primary">Register as a Volunteer</a>
+            {% endif %}
+        {% else %}
+        <a href="{% url 'event_registration' event_id=event.id %}" class="btn btn-outline-primary">Register as a Volunteer</a>
+        {% endif %}
 
         <a href="{% url 'get_event_list' %}">All Events</a>
 
