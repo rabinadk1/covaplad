@@ -27,9 +27,6 @@ class Donor(models.Model):
 
     # !Store as AB+
     blood_group = models.CharField("Blood Group", max_length=3)
-    test_report = models.ImageField(
-        "Test Report", upload_to="test_reports/", blank=True
-    )
 
     height = models.DecimalField(
         "height (in feet)",
@@ -74,3 +71,11 @@ class DonorRegistration(models.Model):
     class Meta:
         unique_together = ["donor", "venue"]
         verbose_name = "Donor Registration"
+
+
+class TestReport(models.Model):
+    donor = models.ForeignKey(Donor, on_delete=models.CASCADE)
+    report = models.ImageField(upload_to="test_reports/", unique=True)
+
+    class Meta:
+        verbose_name = "Test Report"
