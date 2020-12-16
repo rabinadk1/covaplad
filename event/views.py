@@ -1,3 +1,6 @@
+from datetime import datetime, timezone
+
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
@@ -31,6 +34,10 @@ def event_registration(request: HttpRequest, event_id):
     else:
         volunteer = Volunteer.objects.get(user=user)
         event = Event.objects.get(id=event_id)
+        if event.end - datetime.now(timezone.utc):
+            messages.error(request, message="Event already ended.")
+            return redirect("get_event", event_id=event_id)
+
         if event not in volunteer.events.all():
             event_registration = VolunteerRegistration(volunteer=volunteer, event=event)
             event_registration.save()
