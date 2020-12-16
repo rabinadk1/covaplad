@@ -12,7 +12,7 @@
 			</div>
 
             <div class="card-body">
-            <form action="{% url 'donor_registration' %}"  method="post">
+            <form action="{% url 'donor_registration' %}"  method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <button class="btn btn-success mt-1" type="submit">Register</button>
