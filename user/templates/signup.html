@@ -22,8 +22,16 @@
         <h2>Temporary Address</h2>
         {{ temporary_address_form|crispy }}
       </div>
+
       <div class="col">
         <h2>Permanent Address</h2>
+
+      <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+    Same as temporary
+  </label>
+</div>
         {{ permanent_address_form|crispy }}
       </div>
     </div>
@@ -33,6 +41,6 @@
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'js/fetchPermaAddress.js' %}"></script>
 <script src="{% static 'js/fetchTempAddress.js' %}"></script>
+<script src="{% static 'js/fetchPermaAddress.js' %}"></script>
 {% endblock script %}

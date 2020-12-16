@@ -1,5 +1,7 @@
 "use-strict";
 
+
+
 const country_permanent_select = document.getElementById("id_permanent-country");
 let country_permanent_last_value;
 
@@ -14,6 +16,26 @@ let municipality_permanent_last_value;
 
 const ward_permanent_select = document.getElementById("id_permanent-ward");
 let ward_permanent_last_value;
+
+sameAsTemp.onchange = (event) => {
+  if (event.target.checked) {
+    console.log("Checked")
+    console.log(country_select.value)
+    country_permanent_select.value = country_select.value
+    province_permanent_select.value = province_select.value
+    district_permanent_select.value = district_select.value
+    municipality_permanent_select.value = municipality_select.value
+    ward_permanent_select.value= ward_select.value
+  }
+  else {
+    country_permanent_select.value = ""
+    province_permanent_select.value = ""
+    district_permanent_select.value = ""
+    municipality_permanent_select.value =""
+    ward_permanent_select.value = ""
+  }
+}
+
 
 const permaHelper = async (name, cause, effect, last_value, callback) => {
   const cause_id = cause.value;
