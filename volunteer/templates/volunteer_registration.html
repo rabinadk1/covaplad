@@ -1,26 +1,36 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block title %}
  - Volunteer Registration
 {% endblock title %}
 
 {% block content %}
-    <div class="d-flex justify-content-center align-items-center vh-100" style="background:linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('https://s19538.pcdn.co/wp-content/uploads/2020/03/helping-hands.jpg'); background-size: contain;">
-        <div class="card shadow p-3 mb-5 bg-white rounded">
-			<div class="card-header">
-				<h3 style="color:#008000;">Volunteer Registration</h3>
-			</div>
-
-            <div class="card-body">
-            <form action="{% url 'volunteer_registration' %}"  method="post">
-                {% csrf_token %}
-                {{ form|crispy }}
-                {% if has_registered %}
-                    <button class="btn btn-success mt-1" type="submit" disabled>Already Registered</button>
-                {% else %}
-                    <button class="btn btn-success mt-1" type="submit">Register</button>
-                {% endif %}
-            </form>
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Volunteer Registration Form</h2>
+            <p class="lead">
+                Register as a COVID-19 volunteer by filling up the form below.
+            </p>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-2 float-right">
+                <img src="{% static 'img/doctor-woman.svg' %}" alt="" height="50%">
+            </div>
+            <div class="col-md-2 order-md-2 mb-4">
+                <img src="{% static 'img/doctor-man.svg' %}" alt="" height="50%">
+            </div>
+            <div class="col-md-4 order-md-1">
+                <form action="{% url 'volunteer_registration' %}"  method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    {% if has_registered %}
+                        <button class="btn btn-success mt-1" type="submit" disabled>Already Registered</button>
+                    {% else %}
+                        <button class="btn btn-success mt-1" type="submit">Register</button>
+                    {% endif %}
+                </form>
+            </div>
         </div>
     </div>
 {% endblock content %}
