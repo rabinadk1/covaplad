@@ -74,8 +74,15 @@ class DonorRegistration(models.Model):
 
 
 class TestReport(models.Model):
+    def donor_directory_path(instance, filename):
+        # file will be uploaded to MEDIA_ROOT/donor_<id>/<filename>
+        return f"donor_{instance.donor_id}/{filename}"
+
     donor = models.ForeignKey(Donor, on_delete=models.CASCADE)
-    report = models.ImageField(upload_to="test_reports/", unique=True)
+    report = models.ImageField(upload_to=donor_directory_path, unique=True)
 
     class Meta:
         verbose_name = "Test Report"
+
+    def __str__(self):
+        return self.report
