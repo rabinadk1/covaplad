@@ -7,8 +7,8 @@ from . import forms, models
 # Create your views here.
 
 
-def index(request):
-    return HttpResponse("You're at the volunteers url.")
+def volunteer(request):
+    return render(request, "volunteer.html")
 
 
 @login_required
