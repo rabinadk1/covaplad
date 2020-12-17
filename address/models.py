@@ -81,6 +81,6 @@ class Ward(models.Model):
         )
 
     def __str__(self):
-        # mun_name, rest = str(self.municipality).split(",", 1)
-        # return ",".join((f"{mun_name}-{self.number}", rest))
+        # mun_name = str(self.municipality)
+        # return mun_name + "-" + str(self.number)
         return str(self.number)

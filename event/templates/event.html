@@ -5,39 +5,46 @@
 {% endblock title%}
 
 {% block content %}
-<div class="container">
-    <h5>
-        <a href="{% url 'get_event_list' %}">All Events</a>
-    </h5>
-    <h4>
-        <span class="badge bg-success">{{event.event_type.name}}</span>
-    </h4>
-    {% if hasEnded %}
-        <span class="badge bg-danger">Completed</span>
-    {% endif%}
-    <h2>{{ event.name }}</h2>
-    <div class="d-flex justify-content-between flex-row">
-        <span>
-        <strong>Start time:</strong> {{event.start}}</span>
-        <span>
-            <strong>{% if hasEnded %} Ended {% else %} Ending {%endif %} at:</strong> {{event.end}}
-        </span>
+<div class="container container-fluid my-4">
+    <div class="container container-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>
+                    <a href="{% url 'get_event_list' %}">All Events</a>
+                </h5>
+                <h4>
+                    <span class="badge bg-success">{{event.event_type.name}}</span>
+                </h4>
+                {% if hasEnded %}
+                    <span class="badge bg-danger">Completed</span>
+                {% endif%}
+                <h2>{{ event.name }}</h2>
+                <p class="lead">{{event.details}}</p>
+                <div class="d-flex justify-content-between flex-row m-4">
+                    <span>
+                    <strong>Start time:</strong> {{event.start}}</span>
+                    <span>
+                        <strong>{% if hasEnded %} Ended {% else %} Ending {%endif %} at:</strong> {{event.end}}
+                    </span>
+                </div>
+                <div class="m-4">
+                    <span><strong>Event Type:</strong> {{event.event_type.name}}</span>
+                    <span>({{event.event_type.description}} )</span>
+                </div>
+                <div class="m-4">
+                    <strong> Address:</strong>
+                    {{event.address.municipality}} - {{event.address}}, {{event.address.municipality.district}},
+                    {{event.address.municipality.district.province}}
+                </div>
+                {% if user.is_authenticated and user.volunteer and event in user.volunteer.events.all %}
+                <p class="text-decoration-underline">Already Registered as a volunteer in this venue.</p>
+                {% else %}
+                <a href="{% url 'event_registration' event_id=event.id %}" class="btn btn-outline-primary">
+                    Register as a Volunteer
+                </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div>
-        <span><strong>Event Type:</strong> {{event.event_type.name}}</span>
-        <span>({{event.event_type.description}} )</span>
-    </div>
-    <p>
-        <strong> Address:</strong>
-        {{event.address.municipality}} - {{event.address}}, {{event.address.municipality.district}},
-        {{event.address.municipality.district.province}}
-    </p>
-    {% if user.is_authenticated and user.volunteer and event in user.volunteer.events.all %}
-    <p class="text-decoration-underline">Already Registered as a volunteer in this venue.</p>
-    {% else %}
-    <a href="{% url 'event_registration' event_id=event.id %}" class="btn btn-outline-primary">
-        Register as a Volunteer
-    </a>
-    {% endif %}
 </div>
 {% endblock content %}
