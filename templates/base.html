@@ -177,8 +177,8 @@
                     {{user.username}}
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Volunteer</a></li>
-                    <li><a class="dropdown-item" href="#">Donor</a></li>
+                    <li><a class="dropdown-item" href="{% url 'volunteer_registration' %}">Volunteer</a></li>
+                    <li><a class="dropdown-item" href="{% url 'donor_registration' %}">Donor</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                   </ul>

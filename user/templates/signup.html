@@ -11,7 +11,7 @@ Register
 {% block content %}
 <div class="container">
   <div class="py-5 text-center">
-      <h2 class="text-success">Signup Form</h2>
+      <h2 class="text-primary">Signup Form</h2>
       <p class="lead">
           Signup by filling the form below and become a plasma donor and COVID-19 volunteer.
       </p>
@@ -23,12 +23,12 @@ Register
     <div class="col-md-8 bg-light p-5">
       <form action="{% url 'signup' %}" method="post">
         {% csrf_token %}
-        {% crispy signup_form %}
+        {{signup_form|crispy }}
         <hr />
         <div class="row my-3">
           <div class="col border-end">
             <h5 class="text-primary text-center">Temporary Address</h5>
-            {% crispy temporary_address_form %}
+            {{ temporary_address_form|crispy }}
           </div>
 
           <div class="col">
@@ -40,7 +40,7 @@ Register
                   Same as temporary
                 </label>
               </div>
-              {% crispy permanent_address_form %}
+              {{ permanent_address_form|crispy }}
             </div>
         </div>
         <div class="d-flex justify-content-center">

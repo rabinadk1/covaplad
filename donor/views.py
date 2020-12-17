@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
 from . import forms
-from .models import TestReport
+from .models import Donor, TestReport
 
 # Create your views here.
 
@@ -31,6 +31,13 @@ def donor_registration(request: HttpRequest):
 
         return render(request, "donor_registration.html", {"form": form})
     else:
-        # donor = models.Donor.objects.get(user=user)
-        print("Already a donor")
-        return render(request, "donor_registration.html")
+        donor = Donor.objects.get(user=user)
+        form = forms.DonorForm(instance=donor)
+        for fieldname in form.fields:
+            form.fields[fieldname].disabled = True
+        has_registered = True
+        return render(
+            request,
+            "donor_registration.html",
+            {"form": form, "has_registered": has_registered},
+        )
