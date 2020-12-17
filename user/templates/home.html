@@ -1,25 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %} -Home {% endblock title%}
+
+{% block title %}
+Home
+{% endblock title%}
+
 {% block content %}
 
+<div class="container">
+  <div class="d-flex flex-lg-row align-items-center justify-content-around mt-5 mb-5">
+    <div class="col-6">
+      <div class="text-left">
+        <h1 style="color:#008000;">Covid Volunteer and Plasma Donor</h1>
+        <p>Join the fight against COVID-19 by participating in various social events as a volunteer or helping patients
+          currently fighting the infection by donating your plasma.
 
-<div class="d-flex container flex-lg-row align-items-center justify-content-around mt-5 mb-5">
-<div class="col-6">
-<div class="text-left">
-          <h1 style="color:#008000;">Covid Volunteer and Plasma Donor</h1>
-          <p>Join the fight against COVID-19 by participating in various social events as a volunteer or helping patients currently fighting the infection by donating your plasma.
+        </p>
+        <p><a class="btn btn-lg btn-success" href={% url 'signup' %} role="button">Sign up today</a></p>
+      </div>
+    </div>
+    <div class="col-6">
+      <img src={%static 'img/covid_research.svg' %} alt="covid" width="100%" />
 
-</p>
-          <p><a class="btn btn-lg btn-success" href={% url 'signup' %} role="button">Sign up today</a></p>
-        </div>
- </div>
- <div class="col-6">
-<img src = {%static 'img/covid_research.svg' %} alt="covid" width="100%"/>
-
-</div>
-</div>
-
+    </div>
+  </div>
 
 <h1 style="color:#008000;" class="text-center mb-5">Upcoming Events</h1>
 <div class="container marketing">
@@ -65,9 +69,5 @@
     {% endif %}
   </div>
 </div>
-
 </div>
-
-
-
-  {% endblock content %}
+{% endblock content %}

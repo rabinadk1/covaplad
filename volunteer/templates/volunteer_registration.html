@@ -1,36 +1,37 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+
 {% block title %}
- - Volunteer Registration
+Volunteer Registration
 {% endblock title %}
 
 {% block content %}
-    <div class="container">
-        <div class="py-5 text-center">
-            <h2 class="text-primary">Volunteer Registration Form</h2>
-            <p class="lead">
-                Register as a COVID-19 volunteer by filling up the form below.
-            </p>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Volunteer Registration Form</h2>
+        <p class="lead">
+            Register as a COVID-19 volunteer by filling up the form below.
+        </p>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-2 float-right">
+            <img src="{% static 'img/doctor-woman.svg' %}" alt="" height="50%">
         </div>
-        <div class="row justify-content-md-center">
-            <div class="col-md-2 float-right">
-                <img src="{% static 'img/doctor-woman.svg' %}" alt="" height="50%">
-            </div>
-            <div class="col-md-2 order-md-2 mb-4">
-                <img src="{% static 'img/doctor-man.svg' %}" alt="" height="50%">
-            </div>
-            <div class="col-md-4 order-md-1">
-                <form action="{% url 'volunteer_registration' %}"  method="post">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    {% if has_registered %}
-                        <button class="btn btn-success mt-1" type="submit" disabled>Already Registered</button>
-                    {% else %}
-                        <button class="btn btn-success mt-1" type="submit">Register</button>
-                    {% endif %}
-                </form>
-            </div>
+        <div class="col-md-2 order-md-2 mb-4">
+            <img src="{% static 'img/doctor-man.svg' %}" alt="" height="50%">
+        </div>
+        <div class="col-md-4 order-md-1">
+            <form action="{% url 'volunteer_registration' %}" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if has_registered %}
+                    <button class="btn btn-success mt-1" type="submit" disabled>Already Registered</button>
+                {% else %}
+                    <button class="btn btn-success mt-1" type="submit">Register</button>
+                {% endif %}
+            </form>
         </div>
     </div>
+</div>
 {% endblock content %}

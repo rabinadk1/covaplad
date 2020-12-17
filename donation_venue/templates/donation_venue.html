@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% block title %} - {{donation_venue.name}} {% endblock title%}
+
+{% block title %}
+{{donation_venue.name}}
+{% endblock title%}
+
 {% block content %}
 <div class="container">
     <h3>{{ donation_venue.name }}</h3>
@@ -11,21 +15,11 @@
         {{donation_venue.address.municipality.district}}, {{donation_venue.address.municipality.district.province}}
     </p>
 
-    {% if user.is_authenticated %}
-    {% if user.donor %}
-    {% if donation_venue in user.donor.venues.all %}
-    <p class="text-decoration-underline">Already Registered as a donor in this venue.</p>
+    {% if user.is_authenticated and user.donor and donation_venue in user.donor.venues.all %}
+        <p class="text-decoration-underline">Already Registered as a donor in this venue.</p>
     {% else %}
-    <a href="{% url 'donation_venue_registration' venue_id=donation_venue.id %}"
-        class="btn btn-outline-primary">Register as a Donor</a>
-    {% endif %}
-    {% else %}
-    <a href="{% url 'donation_venue_registration' venue_id=donation_venue.id %}"
-        class="btn btn-outline-primary">Register as a Donor</a>
-    {% endif %}
-    {% else %}
-    <a href="{% url 'donation_venue_registration' venue_id=donation_venue.id %}"
-        class="btn btn-outline-primary">Register as a Donor</a>
+        <a href="{% url 'donation_venue_registration' venue_id=donation_venue.id %}"
+            class="btn btn-outline-primary">Register as a Donor</a>
     {% endif %}
     <a href="{% url 'get_donation_venue_list' %}">All Venues</a>
 </div>
