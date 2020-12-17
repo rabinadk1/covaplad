@@ -2,12 +2,27 @@
 {% block title %} - {{event.name}} {% endblock title%}
 {% block content %}
 <div class="container">
-    <h3>{{ event.name }}</h3>
-    <p>Start Date: {{event.start}}</p>
-    <p>End Date: {{event.end}}</p>
-    <span>Event Type: {{event.event_type.name}}</span><span>({{event.event_type.description}} )</span>
+<h4><span class="badge bg-success">{{event.event_type.name}}</span></h4>
+{% if hasEnded %}
+    <span class="badge bg-danger">Completed</span>
+    {% endif%}
+    <h2>{{ event.name }}</h2>
+    <div class="d-flex justify-content-between flex-row">
+    <span>
+    <strong>Start time:</strong> {{event.start}}</span>
+    <span>
+{% if hasEnded %}
+    <strong>Ended at:</strong> {{event.end}}</span>
+  {% else %}
+    <strong>Ending at:</strong> {{event.end}}</span>
+{%endif %}
+</div>
+    <div>
+    <span>
+    <strong>Event Type:</strong> {{event.event_type.name}}</span><span>({{event.event_type.description}} )</span>
+    </div>
     <p>
-        Address:
+       <strong> Address:</strong>
         {{event.address.municipality}} - {{event.address}}, {{event.address.municipality.district}},
         {{event.address.municipality.district.province}}
     </p>
