@@ -22,7 +22,9 @@ def get_event_list(request: HttpRequest):
 
 def get_event(request: HttpRequest, event_id):
     event = models.Event.objects.get(id=event_id)
-    hasEnded = event.end < datetime.now(timezone.utc)
+    hasEnded = False
+    if event.end < datetime.now(timezone.utc):
+        hasEnded = True
     context = {"event": event, "hasEnded": hasEnded}
     return render(request, "event.html", context=context)
 
