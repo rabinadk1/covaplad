@@ -47,7 +47,7 @@ class SignupForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            HTML('<p class="h4 pb-3" style="color:#008000; " >Vital Information</h2>'),
+            HTML('<p class="h5 pb-3 text-primary text-center">Vital Information</h2>'),
             Div(
                 Column("email", css_class="form-group col-md-6 mb-1"),
                 Column("username", css_class="form-group col-md-6 mb-1"),
@@ -59,7 +59,10 @@ class SignupForm(UserCreationForm):
                 css_class="row",
             ),
             HTML(
-                '<p class="h4 pb-3" style="color:#008000;" >Personal Information</h2>'
+                """
+                <hr/>
+                <p class="h5 pb-3 text-primary text-center">Personal Information</h2>
+            """
             ),
             Div(
                 Column("first_name", css_class="form-group col-md-4 mb-1"),

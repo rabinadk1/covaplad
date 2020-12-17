@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% load crispy_forms_field %}
 {% load static %}
@@ -9,34 +10,45 @@
 
 {% block content %}
 <div class="container">
-  {% comment %}
-  <div>
-    <img src="https://img.pngio.com/volunteer-volunteer-png-676_261.png" width="100%" />
+  <div class="py-5 text-center">
+      <h2 class="text-success">Signup Form</h2>
+      <p class="lead">
+          Signup by filling the form below and become a plasma donor and COVID-19 volunteer.
+      </p>
   </div>
-  {% endcomment %}
-  <form action="{% url 'signup' %}" method="post">
-    {% csrf_token %}
-    {{signup_form|crispy }}
-    <div class="row my-3">
-      <div class="col">
-        <h2>Temporary Address</h2>
-        {{ temporary_address_form|crispy }}
-      </div>
-
-      <div class="col">
-        <h2>Permanent Address</h2>
-
-      <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Same as temporary
-  </label>
-</div>
-        {{ permanent_address_form|crispy }}
-      </div>
+  <div class="row justify-content-md-center">
+    <div class="col-md-4 d-flex">
+      <img src="{% static 'img/signup.svg' %}" alt="" class="img-fluid" height="50%">
     </div>
-    <button class="btn btn-success" type="submit">Sign up</button>
-  </form>
+    <div class="col-md-8 bg-light p-5">
+      <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        {% crispy signup_form %}
+        <hr />
+        <div class="row my-3">
+          <div class="col border-end">
+            <h5 class="text-primary text-center">Temporary Address</h5>
+            {% crispy temporary_address_form %}
+          </div>
+
+          <div class="col">
+            <h5 class="text-primary text-center">Permanent Address</h5>
+
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Same as temporary
+                </label>
+              </div>
+              {% crispy permanent_address_form %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-success btn-lg" type="submit">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock content %}
 
