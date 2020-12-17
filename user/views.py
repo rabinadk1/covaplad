@@ -1,9 +1,12 @@
+from datetime import datetime
+
 from django.contrib import messages
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
 from address.forms import AddressForm
-from event import models
+from donation_venue import models as dvmodels
+from event import models as evmodels
 
 from . import forms
 
@@ -11,10 +14,19 @@ from . import forms
 
 
 def home(request: HttpRequest):
-    events = models.Event.objects.all().order_by("name")
-    # print(events)
-    context = {"events": events}
-    return render(request, "home.html", context=context)
+    if request.user.is_authenticated:
+        events = evmodels.Event.objects.filter(end__gte=datetime.now()).order_by(
+            "-end", "name"
+        )[:3]
+        donation_venues = dvmodels.DonationVenue.objects.order_by("name")[:3]
+        context = {"events": events, "donation_venues": donation_venues}
+        return render(request, "dashboard.html", context=context)
+    else:
+        events = evmodels.Event.objects.filter(end__gte=datetime.now()).order_by(
+            "-end", "name"
+        )[:3]
+        context = {"events": events}
+        return render(request, "home.html", context=context)
 
 
 def register_user(request: HttpRequest):

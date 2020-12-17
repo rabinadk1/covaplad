@@ -24,29 +24,48 @@
 <h1 style="color:#008000;" class="text-center mb-5">Upcoming Events</h1>
 <div class="container marketing">
   <div class="d-flex flex-lg-column justify-content-around">
-    {% for event in events%}
- <div class="d-flex flex-lg-row border border-success pe-2 my-1">
- <div class="col-2 me-2 text-center" style="background-color:#d0e8c5;" >
- <h2>{{event.start|date:'M '}}</h2>
- <h2>{{event.start|date:'d '}}</h2>
- </div>
-<div class="col-8">
- <a href="{% url 'get_event' event_id=event.id %}">
-<h2 style="color:#008000;">{{event.name}}</h2>
-</a>
- <span><strong>Event type:</strong> {{ event.event_type.name}}</span>,
- <span><strong>Event Location:</strong>
-  {{ event.address.municipality }} - {{ event.address }}
-                        {{ event.address.municipality.district }}
-                        {{ event.address.municipality.district.province }}</span>
+    {% if events|length < 1 %}
+        <div class="d-grid mt-5 text-center">
+            <p class="text-muted">
+                Looks like there are no upcoming events.
+            </p>
+            <p class="text-primary">
+            Find out about our previous events <a href="{% url 'get_event_list' %}" class="alert-link fst-italic">here.</a>
+            </p>
         </div>
-        <div class="col-2 text-center" style="background-color:#f2cfce;" >
- <h2>{{event.end|date:'M '}}</h2>
- <h2>{{event.end|date:'d '}}</h2>
- </div>
+
+    {% else %}
+        {% for event in events %}
+            <div class="d-flex flex-lg-row pe-2 my-1 text-center">
+                <div class="col-2 me-2 text-center" style="background-color:#d0e8c5;" >
+                    <h5>{{event.start|date:'M '}}</h5>
+                    <h5>{{event.start|date:'d '}}</h5>
+                </div>
+                <div class="col-8">
+                    <a href="{% url 'get_event' event_id=event.id %}" class="text-decoration-none">
+                    <h5 class="text-success">{{event.name}}</h5>
+                    </a>
+                    <span><strong>Event type:</strong> {{ event.event_type.name}}</span>,
+                    <span><strong>Event Location:</strong>
+                    {{ event.address.municipality }} - {{ event.address }},
+                                            {{ event.address.municipality.district }},
+                                            {{ event.address.municipality.district.province }}</span>
+                </div>
+                <div class="col-2 text-center" style="background-color:#f2cfce;" >
+                    <h5>{{event.end|date:'M '}}</h5>
+                    <h5>{{event.end|date:'d '}}</h5>
+                </div>
+            </div>
+        {% endfor%}
+        <div class="d-grid gap-2 col-4 mt-5 text-center">
+            <p class="text-primary">
+            Find out more <a href="{% url 'get_event_list' %}" class="alert-link fst-italic">here.</a>
+            </p>
+        </div>
+    {% endif %}
+  </div>
 </div>
-    {% endfor%}
-        </div>
+
 </div>
 
 

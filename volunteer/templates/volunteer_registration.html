@@ -20,7 +20,7 @@
             <div class="col-md-2 order-md-2 mb-4">
                 <img src="{% static 'img/doctor-man.svg' %}" alt="" height="50%">
             </div>
-            <div class="col-md-4 order-md-1">
+            <div class="col-md-4 order-md-1 bg-light p-3 h-75 rounded-3">
                 <form action="{% url 'volunteer_registration' %}"  method="post">
                     {% csrf_token %}
                     {{ form|crispy }}

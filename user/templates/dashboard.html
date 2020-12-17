@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container marketing">
+    <div class="row">
+        <div class="col-md-8 border-end">
+            <div class="py-5 text-center">
+                <a href="{% url 'get_donation_venue_list' %}"
+                    class="h2 text-decoration-none text-success fw-light">
+                        Upcoming Events
+                </a>
+                <p class="lead">
+                    Visit events near you and participate as a volunteer.
+                </p>
+            </div>
+
+            <div class="d-flex flex-lg-column justify-content-around">
+                {% if events|length < 1 %}
+                    <div class="d-grid mt-5 text-center">
+                        <p class="text-muted">
+                            Looks like there are no upcoming events.
+                        </p>
+                        <p class="text-primary">
+                        Find out about our previous events <a href="{% url 'get_event_list' %}" class="alert-link fst-italic">here.</a>
+                        </p>
+                    </div>
+
+                {% else %}
+                    {% for event in events %}
+                        <div class="d-flex flex-lg-row pe-2 my-1 text-center">
+                            <div class="col-2 me-2 text-center" style="background-color:#d0e8c5;" >
+                                <h5>{{event.start|date:'M '}}</h5>
+                                <h5>{{event.start|date:'d '}}</h5>
+                            </div>
+                            <div class="col-8">
+                                <a href="{% url 'get_event' event_id=event.id %}" class="text-decoration-none">
+                                <h5 class="text-success">{{event.name}}</h5>
+                                </a>
+                                <span><strong>Event type:</strong> {{ event.event_type.name}}</span>,
+                                <span><strong>Event Location:</strong>
+                                {{ event.address.municipality }} - {{ event.address }},
+                                                        {{ event.address.municipality.district }},
+                                                        {{ event.address.municipality.district.province }}</span>
+                            </div>
+                            <div class="col-2 text-center" style="background-color:#f2cfce;" >
+                                <h5>{{event.end|date:'M '}}</h5>
+                                <h5>{{event.end|date:'d '}}</h5>
+                            </div>
+                        </div>
+                    {% endfor%}
+                    <div class="d-grid gap-2 col-4 mt-5 text-center">
+                        <p class="text-primary">
+                        Find out more <a href="{% url 'get_event_list' %}" class="alert-link fst-italic">here.</a>
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="py-5 text-center">
+                <a href="{% url 'get_donation_venue_list' %}"
+                    class="h2 text-decoration-none text-success fw-light">
+                        Plasma Donation Venues
+                </a>
+                <p class="lead">
+                    Visit our donation centers to donate plasma.
+                </p>
+            </div>
+            {% for donation_venue in donation_venues %}
+                <div class="my-1 text-center border-bottom">
+                        <p>
+                            <a href="{% url 'get_donation_venue' venue_id=donation_venue.id %}" class="text-success h5 text-decoration-none">
+                                {{donation_venue.name}}
+                            </a>
+                        </p>
+                        <p>
+                        {{ donation_venue.address.municipality }} - {{ donation_venue.address }},
+                                                {{ donation_venue.address.municipality.district }},
+                                                {{ donation_venue.address.municipality.district.province }}</span>
+                        </p>
+                </div>
+            {% endfor%}
+            <div class="gap-2 text-center">
+                <p class="text-primary">
+                Find out more <a href="{% url 'get_donation_venue_list' %}" class="alert-link fst-italic">here.</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
