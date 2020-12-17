@@ -10,6 +10,11 @@ Volunteer
         {% if user.volunteer.events.all|length < 1 %}
             <div class="jumbotron m-4 text-center text-dark">
                 <h1 class="display-4 text-success">Visit our Volunteering Events today.</h1>
+                <div class="d-grid gap-2 col-4 mx-auto text-center">
+                    <p class="fw-bold text-primary">
+                        Find out where to volunteer <a href="{% url 'get_event_list' %}" class="alert-link fst-italic">here.</a>
+                    </p>
+                </div>
             </div>
         {% else %}
             <div class="jumbotron m-4 text-center text-dark">

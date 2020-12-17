@@ -22,7 +22,9 @@ def get_event_list(request: HttpRequest):
 
 def get_event(request: HttpRequest, event_id):
     event = models.Event.objects.get(id=event_id)
-    hasEnded = event.end < datetime.now(timezone.utc)
+    hasEnded = False
+    if event.end < datetime.now(timezone.utc):
+        hasEnded = True
     context = {"event": event, "hasEnded": hasEnded}
     return render(request, "event.html", context=context)
 
@@ -35,7 +37,7 @@ def event_registration(request: HttpRequest, event_id):
     else:
         volunteer = Volunteer.objects.get(user=user)
         event = Event.objects.get(id=event_id)
-        if event.end - datetime.now(timezone.utc):
+        if event.end < datetime.now(timezone.utc):
             messages.error(request, message="Event already ended.")
             return redirect("get_event", event_id=event_id)
 

@@ -39,9 +39,14 @@
                 {% if user.is_authenticated and user.volunteer and event in user.volunteer.events.all %}
                 <p class="text-decoration-underline">Already Registered as a volunteer in this venue.</p>
                 {% else %}
+                {% if hasEnded %}
+                <p class="text-danger text-decoration-underline">This event has already ended.</p>
+
+                {%else%}
                 <a href="{% url 'event_registration' event_id=event.id %}" class="btn btn-outline-primary">
                     Register as a Volunteer
                 </a>
+                {%endif%}
                 {% endif %}
             </div>
         </div>
