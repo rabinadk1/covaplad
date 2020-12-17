@@ -26,8 +26,8 @@ class DonorForm(forms.ModelForm):
             "last_symptom_date": forms.widgets.DateInput(
                 attrs={
                     "type": "date",
-                    "min": lambda: date.today() - timedelta(28),
-                    "max": date.today,
+                    "min": date(2020, 1, 1),
+                    "max": lambda: date.today() - timedelta(28),
                 }
             ),
         }
