@@ -35,7 +35,7 @@ def event_registration(request: HttpRequest, event_id):
     else:
         volunteer = Volunteer.objects.get(user=user)
         event = Event.objects.get(id=event_id)
-        if event.end - datetime.now(timezone.utc):
+        if event.end < datetime.now(timezone.utc):
             messages.error(request, message="Event already ended.")
             return redirect("get_event", event_id=event_id)
 
