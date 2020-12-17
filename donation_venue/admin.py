@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django.urls import reverse
-from django.utils.html import mark_safe
+# from django.urls import reverse
+# from django.utils.html import mark_safe
 
 from donor.models import DonorRegistration
 
@@ -10,13 +10,13 @@ from .models import DonationVenue
 class DonorRegistrationInline(admin.TabularInline):
     model = DonorRegistration
     extra = 0
-    readonly_fields = ("link",)
+    # readonly_fields = ("link",)
 
-    def link(self, instance):
-        url = reverse("admin:donor_donor_change", args=(instance.id,))
-        return mark_safe("<a href='%s'>%s</a>" % (url, instance))
+    # def link(self, instance):
+    #     url = reverse("admin:donor_donor_change", args=(instance.id,))
+    #     return mark_safe("<a href='%s'>%s</a>" % (url, instance))
 
-    # show_change_link = True
+    # # show_change_link = True
 
 
 class DonationVenueAdmin(admin.ModelAdmin):
