@@ -16,6 +16,16 @@
       {% endblock %}
     </title>
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -141,7 +151,7 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
         <div class="container-fluid">
           <a class="navbar-brand" style="color:#008000;font-weight:bold;" href="{% url 'home' %}">COVAPLAD</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -189,7 +199,9 @@
 
     <footer class="container">
       <hr class="featurette-divider">
-      <p class="float-right"><a href="#">Back to top</a></p>
+      <p class="float-right">
+        <a href="#navbar">Back to top</a>
+      </p>
       <span class="text-muted">
         <small>&copy; Copyright
           <script type="text/JavaScript">
