@@ -6,39 +6,38 @@
 
 {% block content %}
 <div class="container">
-<h4><span class="badge bg-success">{{event.event_type.name}}</span></h4>
-{% if hasEnded %}
-    <span class="badge bg-danger">Completed</span>
+    <h5>
+        <a href="{% url 'get_event_list' %}">All Events</a>
+    </h5>
+    <h4>
+        <span class="badge bg-success">{{event.event_type.name}}</span>
+    </h4>
+    {% if hasEnded %}
+        <span class="badge bg-danger">Completed</span>
     {% endif%}
     <h2>{{ event.name }}</h2>
     <div class="d-flex justify-content-between flex-row">
-    <span>
-    <strong>Start time:</strong> {{event.start}}</span>
-    <span>
-{% if hasEnded %}
-    <strong>Ended at:</strong> {{event.end}}</span>
-  {% else %}
-    <strong>Ending at:</strong> {{event.end}}</span>
-{%endif %}
-</div>
+        <span>
+        <strong>Start time:</strong> {{event.start}}</span>
+        <span>
+            <strong>{% if hasEnded %} Ended {% else %} Ending {%endif %} at:</strong> {{event.end}}
+        </span>
+    </div>
     <div>
-    <span>
-    <strong>Event Type:</strong> {{event.event_type.name}}</span><span>({{event.event_type.description}} )</span>
+        <span><strong>Event Type:</strong> {{event.event_type.name}}</span>
+        <span>({{event.event_type.description}} )</span>
     </div>
     <p>
-       <strong> Address:</strong>
+        <strong> Address:</strong>
         {{event.address.municipality}} - {{event.address}}, {{event.address.municipality.district}},
         {{event.address.municipality.district.province}}
     </p>
     {% if user.is_authenticated and user.volunteer and event in user.volunteer.events.all %}
-        <p class="text-decoration-underline">Already Registered as a volunteer in this venue.</p>
+    <p class="text-decoration-underline">Already Registered as a volunteer in this venue.</p>
     {% else %}
-        <a href="{% url 'event_registration' event_id=event.id %}" class="btn btn-outline-primary">
-            Register as a Volunteer
-        </a>
+    <a href="{% url 'event_registration' event_id=event.id %}" class="btn btn-outline-primary">
+        Register as a Volunteer
+    </a>
     {% endif %}
-
-    <a href="{% url 'get_event_list' %}">All Events</a>
-
 </div>
 {% endblock content %}

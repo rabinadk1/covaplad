@@ -6,9 +6,12 @@
 
 {% block content %}
 <div class="container">
+    <h5>
+    <a href="{% url 'get_donation_venue_list' %}">All Venues</a>
+    </h5>
     <h3>{{ donation_venue.name }}</h3>
     <p>Email: {{donation_venue.email}}</p>
-    <p>Email: {{donation_venue.phone_number}}</p>
+    <p>Phone Number: {{donation_venue.phone_number}}</p>
     <p>
         Address:
         {{donation_venue.address.municipality}} - {{donation_venue.address}},
@@ -21,6 +24,5 @@
         <a href="{% url 'donation_venue_registration' venue_id=donation_venue.id %}"
             class="btn btn-outline-primary">Register as a Donor</a>
     {% endif %}
-    <a href="{% url 'get_donation_venue_list' %}">All Venues</a>
 </div>
 {% endblock content %}
