@@ -1,54 +1,58 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %} -Home {% endblock title%}
+
+{% block title %}
+Home
+{% endblock title%}
+
 {% block content %}
 
 
-<div class="d-flex container flex-lg-row align-items-center justify-content-around mt-5 mb-5">
-<div class="col-6">
-<div class="text-left">
-          <h1 style="color:#008000;">Covid Volunteer and Plasma Donor</h1>
-          <p>Join the fight against COVID-19 by participating in various social events as a volunteer or helping patients currently fighting the infection by donating your plasma.
+<div class="container">
+  <div class="d-flex flex-lg-row align-items-center justify-content-around mt-5 mb-5">
+    <div class="col-6">
+      <div class="text-left">
+        <h1 style="color:#008000;">Covid Volunteer and Plasma Donor</h1>
+        <p>Join the fight against COVID-19 by participating in various social events as a volunteer or helping patients
+          currently fighting the infection by donating your plasma.
 
-</p>
-          <p><a class="btn btn-lg btn-success" href={% url 'signup' %} role="button">Sign up today</a></p>
+        </p>
+        <p><a class="btn btn-lg btn-success" href={% url 'signup' %} role="button">Sign up today</a></p>
+      </div>
+    </div>
+    <div class="col-6">
+      <img src={%static 'img/covid_research.svg' %} alt="covid" width="100%" />
+
+    </div>
+  </div>
+
+
+  <h1 style="color:#008000;" class="text-center mb-5">Upcoming Events</h1>
+  <div class="marketing">
+    <div class="d-flex flex-lg-column justify-content-around">
+      {% for event in events%}
+      <div class="d-flex flex-lg-row border border-success pe-2 my-1">
+        <div class="col-2 me-2 text-center" style="background-color:#d0e8c5;">
+          <h2>{{event.start|date:'M '}}</h2>
+          <h2>{{event.start|date:'d '}}</h2>
         </div>
- </div>
- <div class="col-6">
-<img src = {%static 'img/covid_research.svg' %} alt="covid" width="100%"/>
-
-</div>
-</div>
-
-
-<h1 style="color:#008000;" class="text-center mb-5">Upcoming Events</h1>
-<div class="container marketing">
-  <div class="d-flex flex-lg-column justify-content-around">
-    {% for event in events%}
- <div class="d-flex flex-lg-row border border-success pe-2 my-1">
- <div class="col-2 me-2 text-center" style="background-color:#d0e8c5;" >
- <h2>{{event.start|date:'M '}}</h2>
- <h2>{{event.start|date:'d '}}</h2>
- </div>
-<div class="col-8">
- <a href="{% url 'get_event' event_id=event.id %}">
-<h2 style="color:#008000;">{{event.name}}</h2>
-</a>
- <span><strong>Event type:</strong> {{ event.event_type.name}}</span>,
- <span><strong>Event Location:</strong>
-  {{ event.address.municipality }} - {{ event.address }}
-                        {{ event.address.municipality.district }}
-                        {{ event.address.municipality.district.province }}</span>
+        <div class="col-8">
+          <a href="{% url 'get_event' event_id=event.id %}">
+            <h2 style="color:#008000;">{{event.name}}</h2>
+          </a>
+          <span><strong>Event type:</strong> {{ event.event_type.name}}</span>,
+          <span><strong>Event Location:</strong>
+            {{ event.address.municipality }} - {{ event.address }}
+            {{ event.address.municipality.district }}
+            {{ event.address.municipality.district.province }}</span>
         </div>
-        <div class="col-2 text-center" style="background-color:#f2cfce;" >
- <h2>{{event.end|date:'M '}}</h2>
- <h2>{{event.end|date:'d '}}</h2>
- </div>
-</div>
-    {% endfor%}
+        <div class="col-2 text-center" style="background-color:#f2cfce;">
+          <h2>{{event.end|date:'M '}}</h2>
+          <h2>{{event.end|date:'d '}}</h2>
         </div>
+      </div>
+      {% endfor%}
+    </div>
+  </div>
 </div>
-
-
-
-  {% endblock content %}
+{% endblock content %}

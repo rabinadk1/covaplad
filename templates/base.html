@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>COVAPLAD
+    <title>COVAPLAD -
       {% block title %}
       {% endblock %}
     </title>
@@ -151,10 +151,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                <a class="nav-link" style="color:#008000; " aria-current="page"
-                  href="{% url 'volunteer' %}">Volunteer</a>
-                <a class="nav-link " style="color:#008000;"
-                  href="{% url 'donor' %}">Plasma Donation</a>
+              <a class="nav-link" style="color:#008000; " aria-current="page" href="{% url 'volunteer' %}">Volunteer</a>
+              <a class="nav-link " style="color:#008000;" href="{% url 'donor' %}">Plasma Donation</a>
             </div>
             {% if user.is_authenticated %}
             <div class="d-flex">

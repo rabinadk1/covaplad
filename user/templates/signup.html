@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block title %}
-- Register
+Register
 {% endblock title %}
 
 {% block content %}
@@ -26,12 +26,12 @@
       <div class="col">
         <h2>Permanent Address</h2>
 
-      <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Same as temporary
-  </label>
-</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Same as temporary
+          </label>
+        </div>
         {{ permanent_address_form|crispy }}
       </div>
     </div>

@@ -1,33 +1,33 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+
 {% block title %}
-- Donor Registration
+Donor Registration
 {% endblock title %}
 
 {% block content %}
 <div class="container">
-        <div class="py-5 text-center">
-            <h2 class="text-success">Plasma Donor Registration Form</h2>
-            <p class="lead">
-                Register as a Plasma Donor by filling up the form below.
-            </p>
+    <div class="py-5 text-center">
+        <h2 class="text-success">Plasma Donor Registration Form</h2>
+        <p class="lead">
+            Register as a Plasma Donor by filling up the form below.
+        </p>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4 order-md-1 mb-4">
+            <img src="{% static 'img/doctors.svg' %}" alt="" class="img-fluid" height="50%">
         </div>
-        <div class="row justify-content-md-center">
-            <div class="col-md-4 order-md-1 mb-4">
-                <img src="{% static 'img/doctors.svg' %}" alt="" class="img-fluid" height="50%">
-            </div>
-            <div class="col-md-4 order-md-2">
-                <form action="{% url 'donor_registration' %}"  method="post" enctype="multipart/form">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    {% if has_registered %}
-                        <button class="btn btn-success mt-1" type="submit" disabled>Already Registered</button>
-                    {% else %}
-                        <button class="btn btn-success mt-1" type="submit">Register</button>
-                    {% endif %}
-                </form>
-            </div>
+        <div class="col-md-4 order-md-2">
+            <form action="{% url 'donor_registration' %}" method="post" enctype="multipart/form">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if has_registered %}
+                    <button class="btn btn-success mt-1" type="submit" disabled>Already Registered</button>
+                {% else %}
+                    <button class="btn btn-success mt-1" type="submit">Register</button>
+                {% endif %}
+            </form>
         </div>
     </div>
 </div>
