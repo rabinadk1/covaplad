@@ -1,10 +1,11 @@
 from django.contrib import admin
-# from django.urls import reverse
-# from django.utils.html import mark_safe
 
 from donor.models import DonorRegistration
 
 from .models import DonationVenue
+
+# from django.urls import reverse
+# from django.utils.html import mark_safe
 
 
 class DonorRegistrationInline(admin.TabularInline):

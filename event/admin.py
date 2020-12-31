@@ -1,10 +1,11 @@
 from django.contrib import admin
-# from django.urls import reverse
-# from django.utils.html import mark_safe
 
 from volunteer.models import VolunteerRegistration
 
 from .models import Event, EventType
+
+# from django.urls import reverse
+# from django.utils.html import mark_safe
 
 
 class VolunteerRegistrationInline(admin.TabularInline):
