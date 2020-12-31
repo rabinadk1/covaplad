@@ -1,6 +1,6 @@
 # covaplad
 
-This repo contains the source code for the **COVID Volunteer and Plasma Donor** system. This was an academic project assigned by the **Department of Electronics and Computer Engineering, Pulchowk Campus** under the subject _Database Management System_.
+This repo contains the source code for the **COVID Volunteer and Plasma Donor** system. This was an academic project assigned by the [**Department of Electronics and Computer Engineering, Pulchowk Campus** ](http://doece.pcampus.edu.np/) under the subject _Database Management System_.
 
 ## Technologies Used
 
@@ -12,7 +12,7 @@ This repo contains the source code for the **COVID Volunteer and Plasma Donor** 
 
 ### Install necessary requirements
 
-You need to have _python_ as well as _pip_ installed in your system to run this project. _MariaDB_ also need to be explicitly installed and configured as per your convinience.
+You need to have [_python_](https://www.python.org/) as well as _pip_ installed in your system to run this project. [_MariaDB_](https://mariadb.org/) also need to be explicitly installed and configured as per your convinience. You can also install [XAMPP](https://www.apachefriends.org/index.html), which comes with [MariaDB](https://mariadb.org/) and [PHPMyAdmin](https://www.phpmyadmin.net/), if you do not like to tinker much with your system.
 
 To install python dependencies, follow the following steps. _Note: The following instructions assumed you have **Python 3** for the `python` command._
 
@@ -56,7 +56,6 @@ NOTE: This only propagates the changes to the database schema to your newly crea
 
 Now the schema of various tables are setup in your newly created database. You can now run the database server using the following command.
 
-`./manage.py runserver` or `./run.sh`
+`./manage.py runserver`
 
 This will run a development server in localhost on port 8000. The development server will not be accessible on the LAN just now.
-

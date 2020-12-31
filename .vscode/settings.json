@@ -15,6 +15,5 @@
   "prettier.disableLanguages": [
     "html"
   ],
-  "prettier.enable": false,
   "python.pythonPath": ".venv/bin/python3"
 }
