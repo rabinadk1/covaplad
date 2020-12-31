@@ -52,6 +52,40 @@ To migrate the necessary changes to the newly created database run the following
 
 NOTE: This only propagates the changes to the database schema to your newly created database. It doesn't add any data entries to the database. For a sample of data entries please contact the team.
 
+### First Time setup
+During the first time setup, the **admin user** should be created from the python shell. So in order to create an admin user, run the following command from the project root directory.
+
+`./manage.py shell`
+
+This opens an interactive python shell. In the python shell, enter the following line by line.
+
+```python
+from address.models import *
+from user.models import User
+from datetime import date
+
+c = Country(name="Nepal")
+c.save()
+p = Province(name="Bagmati Pradesh", country=c)
+p.save()
+d = District(name="Kathmandu", province=p)
+d.save()
+m = Municipality(name="Nagarjun", district=d)
+m.save()
+w = Ward(number=1, municipality=m)
+w.save()
+
+
+user = User(username="admin",first_name="Ram", middle_name="Bahadur", last_name="Thami", email="admin@covaplad.com", phone_number=9860807667,gender="M", temporary_address=w, permanent_address=w)
+user.set_password("admin")
+user.dob = date(1999,1,1)
+user.is_superuser=True
+user.is_staff=True
+user.save()
+```
+
+Now an admin user with username `admin` and password `admin` is created. You can visit the admin site by going to `/admin` in the website if you are logged in as the admin
+
 ### Run Backend Server
 
 Now the schema of various tables are setup in your newly created database. You can now run the database server using the following command.
